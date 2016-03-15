@@ -1,0 +1,10 @@
+{
+  "name": "licenta",
+  "description": "A starter project for AngularJS",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "bootstrap": "^3.3.6",
+    "angular-bootstrap": "^1.2.2"
+  }
+}
