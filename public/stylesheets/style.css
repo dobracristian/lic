@@ -1,0 +1,33 @@
+#page-wrap {
+    margin: 50px;
+}
+
+table.standard {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.standard > tbody > tr:nth-of-type(odd) {
+    background: #eee;
+}
+
+table.standard > tbody > tr > th {
+    /*background-color: grey;
+    color: white;
+    border: 1px solid #aaa;
+    padding: 1px 3px;*/
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+ }
+
+table.standard > tbody > tr > td {
+    /*border: 1px solid #aaa;
+    padding: 1px 3px;*/
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+}

@@ -1,6 +1,3 @@
-/**
- * Created by Dobra on 2/24/2016.
- */
 console.log('salut');
 
 var restify = require('restify');
@@ -8,6 +5,7 @@ var restify = require('restify');
 
 var server = restify.createServer();
 server.use(restify.bodyParser());
+server.use(restify.queryParser());
 
 //server.get('/', function(req, res, next) {
 //    res.send('Salut!');

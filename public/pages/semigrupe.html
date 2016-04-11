@@ -1,1 +1,22 @@
 seeeeemiiiiii
+
+<div id="page-wrap">
+    <table class="standard">
+        <tr>
+            <th>Facultate</th>
+            <th>Sectie</th>
+            <th>Serie</th>
+            <th>Grupa</th>
+            <th>Semigrupa</th>
+            <th>Studenti</th>
+        </tr>
+        <tr ng-repeat="semigrupe in semigrupe">
+            <td>{{semigrupe.fac_nume}}</td>
+            <td>{{semigrupe.sc_nume}}</td>
+            <td>{{semigrupe.ser_nume}}</td>
+            <td>{{semigrupe.gr_nr}}</td>
+            <td>{{semigrupe.nr_semigrupa}}</td>
+            <td><a ui-sref="studenti({sem: semigrupe.id})">Vezi studenti</a></td>
+        </tr>
+    </table>
+</div>

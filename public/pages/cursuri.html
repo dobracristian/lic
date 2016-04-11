@@ -1,1 +1,22 @@
 cuuuuurrrssss
+
+<div id="page-wrap">
+    <table class="standard">
+        <tr>
+            <th>Curs</th>
+            <th>Materie</th>
+            <th>Profesor</th>
+            <th>Sectie</th>
+            <th>Serie</th>
+        </tr>
+        <tr ng-repeat="curs in cursuri">
+            <td>{{curs.nume}}</td>
+            <td>{{curs.mat_nume}}</td>
+            <td>{{curs.prof_nume}}
+                {{curs.prof_pren}}
+            </td>
+            <td>{{curs.sc_nume}}</td>
+            <td>{{curs.ser_nume}}</td>
+        </tr>
+    </table>
+</div>

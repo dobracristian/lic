@@ -3,8 +3,19 @@ module.exports = function(server, getConnection) {
     // Lista de setii
     server.get('/api/sectii', function(req, res) {
 
+        console.log('pt facultatea', req.params.f);
+
         var conn = getConnection();
-        conn.query('SELECT * from sectii oredr by nume', function(err, rows){
+
+        var query = 'SELECT sectii.*, facultati.nume as fac_nume' +
+            ' from sectii' +
+            ' INNER JOIN facultati ON sectii.id_facultate=facultati.id';
+        if(req.params.f) {
+            query += ' where id_facultate=' + req.params.f;
+        }
+        query += ' order by nume';
+
+        conn.query(query, function(err, rows){
 
             conn.end();
             if (err) throw err;

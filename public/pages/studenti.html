@@ -1,1 +1,24 @@
 stuuuuuudddd
+
+<div id="page-wrap">
+    <table class="standard">
+        <tr>
+            <th>Nume</th>
+            <th>Prenume</th>
+            <th>Facultate</th>
+            <th>Sectie</th>
+            <th>Serie</th>
+            <th>Grupa</th>
+            <th>Semigrupa</th>
+        </tr>
+        <tr ng-repeat="student in studenti">
+            <td>{{student.nume}}</td>
+            <td>{{student.prenume}}</td>
+            <td>{{student.fac_nume}}</td>
+            <td>{{student.sc_nume}}</td>
+            <td>{{student.ser_nume}}</td>
+            <td>{{student.gr_nr}}</td>
+            <td>{{student.sem_nr}}</td>
+        </tr>
+    </table>
+</div>

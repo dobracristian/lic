@@ -4,7 +4,21 @@ module.exports = function(server, getConnection) {
     server.get('/api/studenti', function(req, res) {
 
         var conn = getConnection();
-        conn.query('SELECT * from studenti order by nume, prenume', function(err, rows){
+
+        var query = 'SELECT studenti.*, semigrupe.nr_semigrupa as sem_nr, grupe.nr_grupa as gr_nr,' +
+            ' serii.nume as ser_nume, sectii.nume as sc_nume, facultati.nume as fac_nume' +
+            ' from studenti' +
+            ' Inner join semigrupe on studenti.id_semigrupa=semigrupe.id' +
+            ' Inner join grupe on semigrupe.id_grupa=grupe.id' +
+            ' Inner join serii on grupe.id_serie=serii.id' +
+            ' Inner join sectii on serii.id_sectie=sectii.id' +
+            ' Inner join facultati on sectii.id_facultate=facultati.id';
+        if(req.params.sem){
+            query += ' where id_semigrupa='+ req.params.sem;
+        }
+        query += ' order by nume, prenume';
+
+        conn.query(query, function(err, rows){
 
             conn.end();
             if (err) throw err;

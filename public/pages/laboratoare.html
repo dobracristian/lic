@@ -1,1 +1,26 @@
 laaaabbbbb
+
+<div id="page-wrap">
+    <table class="standard">
+        <tr>
+            <th>Laborator</th>
+            <th>Curs</th>
+            <th>Profesor</th>
+            <th>Sectie</th>
+            <th>Serie</th>
+            <th>Grupa</th>
+            <th>Semigrupa</th>
+        </tr>
+        <tr ng-repeat="laborator in laboratoare">
+            <td>{{laborator.nume}}</td>
+            <td>{{laborator.curs_nume}}</td>
+            <td>{{laborator.prof_nume}}
+                {{laborator.prof_pren}}
+            </td>
+            <td>{{laborator.sc_nume}}</td>
+            <td>{{laborator.ser_nume}}</td>
+            <td>{{laborator.nr_gr}}</td>
+            <td>{{laborator.nr_sem}}</td>
+        </tr>
+    </table>
+</div>

@@ -8,63 +8,80 @@ angular.module('app', ['ui.router', 'restangular']).config(function($stateProvid
 
     $stateProvider.state({
         name: 'sectii',
-        url: '/sectii',
-        templateUrl: 'pages/sectii.html'
+        url: '/sectii?f',
+        templateUrl: 'pages/sectii.html',
+        controller: 'SectiiController'
     });
 
     $stateProvider.state({
         name: 'serii',
-        url: '/serii',
-        templateUrl: 'pages/serii.html'
+        url: '/serii?f&sc',
+        templateUrl: 'pages/serii.html',
+        controller: 'SeriiController'
     });
 
     $stateProvider.state({
         name: 'grupe',
-        url: '/grupe',
-        templateUrl: 'pages/grupe.html'
+        url: '/grupe?f&sc&ser',
+        templateUrl: 'pages/grupe.html',
+        controller: 'GrupeController'
     });
 
     $stateProvider.state({
         name: 'semigrupe',
-        url: '/semigrupe',
-        templateUrl: 'pages/semigrupe.html'
+        url: '/semigrupe?f&sc&ser&gr',
+        templateUrl: 'pages/semigrupe.html',
+        controller: 'SemigrupeController'
     });
 
     $stateProvider.state({
         name: 'studenti',
-        url: '/studenti',
-        templateUrl: 'pages/studenti.html'
+        url: '/studenti?f&sc&ser&gr&sem',
+        templateUrl: 'pages/studenti.html',
+        controller: 'StudentiController'
     });
 
     $stateProvider.state({
         name: 'profesori',
         url: '/profesori',
-        templateUrl: 'pages/profesori.html'
+        templateUrl: 'pages/profesori.html',
+        controller: 'ProfesoriController'
     });
 
     $stateProvider.state({
         name: 'materii',
         url: '/materii',
-        templateUrl: 'pages/materii.html'
+        templateUrl: 'pages/materii.html',
+        controller: 'MateriiController'
     });
 
     $stateProvider.state({
         name: 'cursuri',
         url: '/cursuri',
-        templateUrl: 'pages/cursuri.html'
+        templateUrl: 'pages/cursuri.html',
+        controller: 'CursuriController'
     });
 
     $stateProvider.state({
         name: 'laboratoare',
         url: '/laboratoare',
-        templateUrl: 'pages/laboratoare.html'
+        templateUrl: 'pages/laboratoare.html',
+        controller: 'LaboratoareController'
     });
 
 
     $stateProvider.state({
         name: 'seminarii',
         url: '/seminarii',
-        templateUrl: 'pages/seminarii.html'
+        templateUrl: 'pages/seminarii.html',
+        controller: 'SeminariiController'
+    });
+
+    $stateProvider.state({
+        name: 'login',
+        url: '/login',
+        templateUrl: 'pages/login.html',
+        controller: 'LoginController'
     });
 
 });

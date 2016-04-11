@@ -1,1 +1,26 @@
-seeeerrrr
+<div id="page-wrap">
+
+    <select ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in facultati">
+        <option value="">Facultate...</option>
+    </select>
+
+    <!--<select ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii">-->
+        <!--<option value="">Sectie...</option>-->
+    <!--</select>-->
+
+    <table class="standard">
+        <tr>
+            <th nf-if="!filters.sc">Facultate</th>
+            <th>Sectie</th>
+            <th>Serie</th>
+            <th>Grupe</th>
+        </tr>
+        <tr ng-repeat="serie in serii">
+            <td nf-if="!filters.sc">{{serie.fac_nume}}</td>
+            <td>{{serie.sc_nume}}</td>
+            <td>{{serie.nume}}</td>
+            <td><a ui-sref="grupe({ser: serie.id})">Vezi grupe</a></td>
+        </tr>
+    </table>
+    xxx{{filters}}
+</div>

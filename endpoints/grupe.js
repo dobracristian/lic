@@ -4,7 +4,18 @@ module.exports = function(server, getConnection){
     server.get('/api/grupe', function(req, res) {
 
         var conn = getConnection();
-        conn.query('SELECT * from grupe order by nr_grupa', function(err, rows){
+
+        var query = 'SELECT grupe.*, serii.nume as ser_nume, sectii.nume as sc_nume, facultati.nume as fac_nume'+
+                ' from grupe' +
+                ' Inner join serii on grupe.id_serie=serii.id'+
+                ' Inner join sectii on serii.id_sectie=sectii.id'+
+                ' Inner join facultati on sectii.id_facultate=facultati.id';
+        if(req.params.ser) {
+            query += ' where id_serie=' + req.params.ser;
+        }
+        query+= ' order by nr_grupa';
+
+        conn.query(query, function(err, rows){
 
             conn.end();
             if (err) throw err;
