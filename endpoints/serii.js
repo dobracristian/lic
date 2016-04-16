@@ -12,8 +12,8 @@ module.exports = function(server, getConnection){
         if(req.params.sc) {
             query += ' where id_sectie=' + req.params.sc;
         }
-        if(req.params.f) {
-            query += ' and id_facultate=' + req.params.f;
+        else if(req.params.f) {
+            query += ' where id_facultate=' + req.params.f;
         }
         query += ' order by nume';
 

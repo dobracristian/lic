@@ -1,23 +1,23 @@
 <div id="page-wrap">
 
-    <select ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in facultati">
+    <select ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
         <option value="">Facultate...</option>
     </select>
 
-    <!--<select ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii">-->
-        <!--<option value="">Sectie...</option>-->
-    <!--</select>-->
+    <select ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii" ng-disabled="!filters.f">
+        <option value="">Sectie...</option>
+    </select>
 
     <table class="standard">
         <tr>
-            <th nf-if="!filters.sc">Facultate</th>
-            <th>Sectie</th>
+            <th ng-if="!filters.f">Facultate</th>
+            <th  ng-if="!filters.sc">Sectie</th>
             <th>Serie</th>
             <th>Grupe</th>
         </tr>
         <tr ng-repeat="serie in serii">
-            <td nf-if="!filters.sc">{{serie.fac_nume}}</td>
-            <td>{{serie.sc_nume}}</td>
+            <td ng-if="!filters.f">{{serie.fac_nume}}</td>
+            <td  ng-if="!filters.sc">{{serie.sc_nume}}</td>
             <td>{{serie.nume}}</td>
             <td><a ui-sref="grupe({ser: serie.id})">Vezi grupe</a></td>
         </tr>

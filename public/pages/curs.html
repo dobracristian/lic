@@ -1,0 +1,19 @@
+
+<form>
+    <div class="form-group">
+        <label>Nume:</label>
+        <input type="text" class="form-control" ng-model="curs.nume" >
+    </div>
+
+    <div class="form-group">
+        <label>Facultate:</label>
+        <select class="form-control" ng-model="curs.id_facultate" ng-options="f.id as f.nume for f in facultati">
+            <option value=""></option>
+        </select>
+    </div>
+</form>
+
+<button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+<button class="btn btn-primary" ng-click="add()" ng-show="!curs.id">Adauga</button>
+<button class="btn btn-primary" ng-click="save()" ng-show="curs.id">Salveaza</button>
+<br><pre>{{curs|json:4}}</pre>

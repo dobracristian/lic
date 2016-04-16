@@ -1,4 +1,4 @@
-angular.module('app', ['ui.router', 'restangular']).config(function($stateProvider){
+angular.module('app', ['ui.router', 'restangular', 'ui.bootstrap']).config(function($stateProvider){
     $stateProvider.state({
         name: 'facultati',
         url: '/facultati',

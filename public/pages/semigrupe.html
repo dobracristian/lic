@@ -1,20 +1,42 @@
 seeeeemiiiiii
 
 <div id="page-wrap">
+
+
+    <form class="form-inline">
+        <select ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
+            <option value="">Facultate...</option>
+        </select>
+
+        <select class="form-control" ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii" ng-disabled="!filters.f">
+            <option value="">Sectie...</option>
+        </select>
+
+        <select ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
+            <option value="">Serie...</option>
+        </select>
+
+        <select ng-model="filters.gr" ng-options="gr.id as gr.nr_grupa for gr in grupe" ng-disabled="!filters.ser">
+            <option value="">Grupa...</option>
+        </select>
+    </form>
+
+
+
     <table class="standard">
         <tr>
-            <th>Facultate</th>
-            <th>Sectie</th>
-            <th>Serie</th>
-            <th>Grupa</th>
+            <th ng-if="!filters.f">Facultate</th>
+            <th ng-if="!filters.sc">Sectie</th>
+            <th ng-if="!filters.ser">Serie</th>
+            <th ng-if="!filters.gr">Grupa</th>
             <th>Semigrupa</th>
             <th>Studenti</th>
         </tr>
         <tr ng-repeat="semigrupe in semigrupe">
-            <td>{{semigrupe.fac_nume}}</td>
-            <td>{{semigrupe.sc_nume}}</td>
-            <td>{{semigrupe.ser_nume}}</td>
-            <td>{{semigrupe.gr_nr}}</td>
+            <td ng-if="!filters.f">{{semigrupe.fac_nume}}</td>
+            <td ng-if="!filters.sc">{{semigrupe.sc_nume}}</td>
+            <td ng-if="!filters.ser">{{semigrupe.ser_nume}}</td>
+            <td ng-if="!filters.gr">{{semigrupe.gr_nr}}</td>
             <td>{{semigrupe.nr_semigrupa}}</td>
             <td><a ui-sref="studenti({sem: semigrupe.id})">Vezi studenti</a></td>
         </tr>

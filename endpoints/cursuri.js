@@ -1,5 +1,14 @@
 module.exports = function(server, getConnection){
 
+    function getCurs(body) {
+        return  {
+            nume:       body.nume,
+            id_serie:   body.id_serie,
+            id_materie: body.id_materie,
+            id_prof:    body.id_prof
+        };
+    }
+
     //Lista de cursuri
     server.get('/api/cursuri', function(req, res) {
 
@@ -23,12 +32,7 @@ module.exports = function(server, getConnection){
     server.post('/api/cursuri', function (req, res){
 
         var conn = getConnection();
-        var curs = {
-            nume:       req.body.nume,
-            id_serie:   req.body.id_serie,
-            id_materie: req.body.id_materie,
-            id_prof:    req.body.id_prof
-        };
+        var curs = getCurs(req.body);
         console.log('Adaugare curs', curs);
         conn.query('INSERT into cursuri set ?', curs, function(err, result) {
 
@@ -40,30 +44,28 @@ module.exports = function(server, getConnection){
     });
 
     //Stergere din lista de cursuri
-    server.del('/api/cursuri', function (req, res){
+    server.del('/api/cursuri/:id', function (request, response){
 
         var conn = getConnection();
 
-        conn.query('Delete from cursuri where id='+ req.params.id, function(err, res) {
+        conn.query('DELETE from cursuri where id=?', [request.params.id], function(err) {
             conn.end();
             if (err) throw err;
-            res.send(200, 'Deleted');
+            response.send(200, 'Deleted');
         });
     });
 
-    ////Editare lista de cursuri
-    //server.put('/api/cursuri', function (req, res){
-    //
-    //    var conn = getConnection();
-    //
-    //    conn.query('Update cursuri set nume=' +req.params.nume+ ' ,id_serie=' +
-    //         req.params.id_serie,' ,id_materie='+req.params.id_materie+' ,id_prof=' +
-    //         req.params.id_prof+' where id='+req.params.id, function(err, result) {
-    //
-    //        conn.end();
-    //        if (err) throw err;
-    //        cursuri.id = result.insertId;
-    //        res.send(curs);
-    //    });
-    //});
+    //Editare lista de cursuri
+    server.put('/api/cursuri/:id', function (req, res){
+
+        var conn = getConnection();
+        var curs = getCurs(req.body);
+
+        conn.query('Update cursuri set ? where id=?', [curs, req.params.id], function(err, result) {
+
+            conn.end();
+            if (err) throw err;
+            res.send(200, 'Updated');
+        });
+    });
 };

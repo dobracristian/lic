@@ -31,3 +31,11 @@ table.standard > tbody > tr > td {
     border: 1px solid #ccc;
     text-align: left;
 }
+
+table.standard > tbody > tr > td.act {
+    text-align: center;
+}
+
+.modal-content {
+    padding: 10px;
+}

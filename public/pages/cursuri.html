@@ -1,6 +1,7 @@
 cuuuuurrrssss
 
 <div id="page-wrap">
+    <button class="btn btn-primary pull-right" ng-click="add()">Adauga curs</button>
     <table class="standard">
         <tr>
             <th>Curs</th>
@@ -8,6 +9,7 @@ cuuuuurrrssss
             <th>Profesor</th>
             <th>Sectie</th>
             <th>Serie</th>
+            <th>Actiuni</th>
         </tr>
         <tr ng-repeat="curs in cursuri">
             <td>{{curs.nume}}</td>
@@ -17,6 +19,14 @@ cuuuuurrrssss
             </td>
             <td>{{curs.sc_nume}}</td>
             <td>{{curs.ser_nume}}</td>
+            <td class="act">
+                <a href ng-click="delete(curs.id)">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+                <a href ng-click="edit(curs)">
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </td>
         </tr>
     </table>
 </div>

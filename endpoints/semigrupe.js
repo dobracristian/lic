@@ -15,6 +15,15 @@ module.exports = function(server, getConnection){
         if(req.params.gr){
             query += ' where id_grupa=' + req.params.gr;
         }
+        else if(req.params.ser) {
+            query += ' where id_serie=' + req.params.ser;
+        }
+        else if(req.params.sc) {
+            query += ' where id_sectie=' + req.params.sc;
+        }
+        else if(req.params.f) {
+            query += ' where id_facultate=' + req.params.f;
+        }
         query += ' order by nr_semigrupa'
 
         conn.query(query, function(err, rows){

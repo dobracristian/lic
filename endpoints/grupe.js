@@ -11,7 +11,13 @@ module.exports = function(server, getConnection){
                 ' Inner join sectii on serii.id_sectie=sectii.id'+
                 ' Inner join facultati on sectii.id_facultate=facultati.id';
         if(req.params.ser) {
-            query += ' where id_serie=' + req.params.ser;
+            query +=' where id_serie=' + req.params.ser;
+        }
+        else if(req.params.sc) {
+            query +=' where id_sectie=' + req.params.sc;
+        }
+        else if(req.params.f) {
+            query +=' where id_facultate=' + req.params.f;
         }
         query+= ' order by nr_grupa';
 
