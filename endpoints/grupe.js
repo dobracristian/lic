@@ -1,5 +1,12 @@
 module.exports = function(server, getConnection){
 
+    function getGrupe(body) {
+        return  {
+            nr_grupa: body.nr_grupa,
+            id_serie: body.id_serie
+        };
+    }
+
     //Lista de grupe
     server.get('/api/grupe', function(req, res) {
 
@@ -33,10 +40,7 @@ module.exports = function(server, getConnection){
     server.post('/api/grupe', function (req, res){
 
         var conn = getConnection();
-        var grupa = {
-            nr_grupa: req.body.nr_grupa,
-            id_serie: req.body.id_serie
-        };
+        var grupa = getGrupe(req.body);
         console.log('Adaugare grupa', grupa);
         conn.query('INSERT into grupe set ?', grupa, function(err, result) {
 
@@ -44,6 +48,32 @@ module.exports = function(server, getConnection){
             if (err) throw err;
             grupa.id = result.insertId;
             res.send(grupa);
+        });
+    });
+
+    //Stergere din lista de grupe
+    server.del('/api/grupe/:id', function (request, response){
+
+        var conn = getConnection();
+
+        conn.query('DELETE from grupe where id=?', [request.params.id], function(err) {
+            conn.end();
+            if (err) throw err;
+            response.send(200, 'Deleted');
+        });
+    });
+
+    //Editare lista de grupe
+    server.put('/api/grupe/:id', function (req, res){
+
+        var conn = getConnection();
+        var grupa = getGrupe(req.body);
+
+        conn.query('Update grupe set ? where id=?', [grupa, req.params.id], function(err) {
+
+            conn.end();
+            if (err) throw err;
+            res.send(200, 'Updated');
         });
     });
 };

@@ -61,7 +61,7 @@ module.exports = function(server, getConnection){
         var conn = getConnection();
         var curs = getCurs(req.body);
 
-        conn.query('Update cursuri set ? where id=?', [curs, req.params.id], function(err, result) {
+        conn.query('Update cursuri set ? where id=?', [curs, req.params.id], function(err) {
 
             conn.end();
             if (err) throw err;

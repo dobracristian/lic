@@ -1,12 +1,15 @@
 <div id="page-wrap">
 
-    <select ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
-        <option value="">Facultate...</option>
-    </select>
+    <form class="form-inline">
+        <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
+            <option value="">Facultate...</option>
+        </select>
 
-    <select ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii" ng-disabled="!filters.f">
-        <option value="">Sectie...</option>
-    </select>
+        <select class="form-control" ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii" ng-disabled="!filters.f">
+            <option value="">Sectie...</option>
+        </select>
+    </form>
+
 
     <table class="standard">
         <tr>

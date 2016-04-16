@@ -1,8 +1,10 @@
 <div id="page-wrap">
 
-    <select ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
-        <option value="">Facultate...</option>
-    </select>
+    <form class="form-inline">
+        <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
+            <option value="">Facultate...</option>
+        </select>
+    </form>
 
     <table class="standard">
         <tr>

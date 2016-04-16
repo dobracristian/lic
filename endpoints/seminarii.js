@@ -1,5 +1,14 @@
 module.exports = function(server, getConnection){
 
+    function getSeminar(body) {
+        return  {
+            nume:     body.nume,
+            id_curs:  body.id_curs,
+            id_grupa: body.id_grupa,
+            id_prof:  body.id_prof
+        };
+    }
+
     //Lista seminarii
     server.get('/api/seminarii', function(req, res) {
 
@@ -26,12 +35,7 @@ module.exports = function(server, getConnection){
     server.post('/api/seminarii', function (req, res){
 
         var conn = getConnection();
-        var seminar = {
-            nume:     req.body.nume,
-            id_curs:  req.body.id_curs,
-            id_grupa: req.body.id_grupa,
-            id_prof:  req.body.id_prof
-        };
+        var seminar = getSeminar(req.body);
         console.log('Adaugare seminar', seminar);
         conn.query('INSERT into seminarii set ?', seminar, function(err, result) {
 
@@ -39,6 +43,32 @@ module.exports = function(server, getConnection){
             if (err) throw err;
             seminar.id = result.insertId;
             res.send(seminar);
+        });
+    });
+
+    //Stergere din lista de seminarii
+    server.del('/api/seminarii/:id', function (request, response){
+
+        var conn = getConnection();
+
+        conn.query('DELETE from seminarii where id=?', [request.params.id], function(err) {
+            conn.end();
+            if (err) throw err;
+            response.send(200, 'Deleted');
+        });
+    });
+
+    //Editare lista de seminarii
+    server.put('/api/seminarii/:id', function (req, res){
+
+        var conn = getConnection();
+        var seminar = getSeminar(req.body);
+
+        conn.query('Update seminarii set ? where id=?', [seminar, req.params.id], function(err) {
+
+            conn.end();
+            if (err) throw err;
+            res.send(200, 'Updated');
         });
     });
 };

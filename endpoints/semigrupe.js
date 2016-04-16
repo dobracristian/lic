@@ -1,5 +1,12 @@
 module.exports = function(server, getConnection){
 
+    function getSemigr(body) {
+        return  {
+            nr_semigrupa: body.nr_semigrupa,
+            id_grupa:     body.id_grupa
+        };
+    }
+
     //Lista semigrupe
     server.get('/api/semigrupe', function(req, res) {
 
@@ -24,7 +31,7 @@ module.exports = function(server, getConnection){
         else if(req.params.f) {
             query += ' where id_facultate=' + req.params.f;
         }
-        query += ' order by nr_semigrupa'
+        query += ' order by nr_semigrupa';
 
         conn.query(query, function(err, rows){
 
@@ -38,10 +45,7 @@ module.exports = function(server, getConnection){
     server.post('/api/semigrupe', function (req, res){
 
         var conn = getConnection();
-        var semigrupa = {
-            nr_semigrupa: req.body.nr_semigrupa,
-            id_grupa:     req.body.id_grupa
-        };
+        var semigrupa = getSemigr(req.body);
         console.log('Adaugare semgirupa', semigrupa);
         conn.query('INSERT into semigrupe set ?', semigrupa, function(err, result) {
 
@@ -49,6 +53,32 @@ module.exports = function(server, getConnection){
             if (err) throw err;
             semigrupa.id = result.insertId;
             res.send(semigrupa);
+        });
+    });
+
+    //Stergere din lista de semigrupe
+    server.del('/api/semigrupe/:id', function (request, response){
+
+        var conn = getConnection();
+
+        conn.query('DELETE from semigrupe where id=?', [request.params.id], function(err) {
+            conn.end();
+            if (err) throw err;
+            response.send(200, 'Deleted');
+        });
+    });
+
+    //Editare lista de semigrupe
+    server.put('/api/semigrupe/:id', function (req, res){
+
+        var conn = getConnection();
+        var semigrupa = getSemigr(req.body);
+
+        conn.query('Update semigrupe set ? where id=?', [semigrupa, req.params.id], function(err) {
+
+            conn.end();
+            if (err) throw err;
+            res.send(200, 'Updated');
         });
     });
 };
