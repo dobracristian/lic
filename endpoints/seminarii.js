@@ -13,16 +13,48 @@ module.exports = function(server, getConnection){
     server.get('/api/seminarii', function(req, res) {
 
         var conn = getConnection();
-        conn.query('SELECT seminarii.*,cursuri.nume as curs_nume, profesori.nume as prof_nume,' +
+        var query = 'SELECT seminarii.*,cursuri.nume as curs_nume, profesori.nume as prof_nume,' +
             ' profesori.prenume as prof_pren, grupe.nr_grupa as nr_gr, serii.nume as ser_nume, ' +
-            ' sectii.nume as sc_nume' +
+            ' sectii.nume as sc_nume, facultati.nume as fac_nume' +
             ' from seminarii' +
             ' Inner join cursuri on seminarii.id_curs=cursuri.id' +
             ' Inner join grupe on seminarii.id_grupa=grupe.id' +
             ' Inner join profesori on seminarii.id_prof=profesori.id' +
             ' Inner join serii on grupe.id_serie=serii.id' +
             ' Inner join sectii on serii.id_sectie=sectii.id' +
-            ' order by nume', function(err, rows){
+            ' Inner join facultati on sectii.id_facultate=facultati.id';
+
+        var conditions = [];
+        var params = [];
+        if(req.params.gr) {
+            conditions.push('grupe.id=?');
+            params.push(req.params.gr);
+        }
+        else if(req.params.ser) {
+            conditions.push('serii.id=?');
+            params.push(req.params.ser);
+        }
+        else if(req.params.sc) {
+            conditions.push('sectii.id=?');
+            params.push(req.params.sc);
+        }
+        else if(req.params.f) {
+            conditions.push('facultati.id=?');
+            params.push(req.params.f);
+        }
+        if(req.params.prof) {
+            conditions.push('profesori.id=?');
+            params.push(req.params.prof);
+        }
+        if(req.params.curs) {
+            conditions.push('cursuri.id=?');
+            params.push(req.params.curs);
+        }
+        if(conditions.length){
+            query += ' where '+ conditions.join(' and ');
+        }
+        query +=' order by seminarii.nume';
+        conn.query(query, params, function(err, rows){
 
             conn.end();
             if (err) throw err;

@@ -1,0 +1,41 @@
+<div id="page-wrap">
+
+    <button class="btn btn-primary pull-right" ng-click="add()" ng-disabled="!filters.sc">Adauga serie</button>
+    <form class="form-inline">
+        <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
+            <option value="">Facultate...</option>
+        </select>
+
+        <select class="form-control" ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii" ng-disabled="!filters.f">
+            <option value="">Sectie...</option>
+        </select>
+    </form>
+
+
+    <table class="standard">
+        <tr>
+            <th ng-if="!filters.f">Facultate</th>
+            <th  ng-if="!filters.sc">Sectie</th>
+            <th>An</th>
+            <th>Serie</th>
+            <th>Grupe</th>
+            <th>Actiuni</th>
+        </tr>
+        <tr ng-repeat="serie in serii">
+            <td ng-if="!filters.f">{{serie.fac_nume}}</td>
+            <td  ng-if="!filters.sc">{{serie.sc_nume}}</td>
+            <td>{{serie.an}}</td>
+            <td>{{serie.nume}}</td>
+            <td><a ui-sref="^.grupe({ser: serie.id, sc: serie.id_sectie, f: serie.fac_id})">Vezi grupe</a></td>
+            <td class="act">
+                <a href ng-click="delete(serie.id)">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+                <a href ng-click="edit(serie)">
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+    xxx{{filters}}
+</div>

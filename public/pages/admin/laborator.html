@@ -1,0 +1,11 @@
+<form>
+    <div class="form-group">
+        <label>Nume:</label>
+        <input type="text" class="form-control" ng-model="laborator.nume" >
+    </div>
+</form>
+
+<button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+<button class="btn btn-primary" ng-click="add()" ng-show="!laborator.id">Adauga</button>
+<button class="btn btn-primary" ng-click="save()" ng-show="laborator.id">Salveaza</button>
+<br><pre>{{laborator|json:4}}</pre>

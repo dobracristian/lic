@@ -41,6 +41,8 @@ require('./endpoints/materii.js')(server, getConnection);
 require('./endpoints/seminarii.js')(server, getConnection);
 require('./endpoints/laboratoare.js')(server, getConnection);
 require('./endpoints/profesori.js')(server, getConnection);
+require('./endpoints/fisiere.js')(server, getConnection);
+require('./endpoints/student/curs-lab-sem.js')(server, getConnection);
 
 server.listen(8080, function() {
     console.log('listening', server.name, server.url);

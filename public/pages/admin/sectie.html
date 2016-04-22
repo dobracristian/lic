@@ -1,0 +1,11 @@
+<form>
+    <div class="form-group">
+        <label>Nume Sectie:</label>
+        <input type="text" class="form-control" ng-model="sectie.nume" >
+    </div>
+</form>
+
+<button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+<button class="btn btn-primary" ng-click="add()" ng-show="!sectie.id">Adauga</button>
+<button class="btn btn-primary" ng-click="save()" ng-show="sectie.id">Salveaza</button>
+<br><pre>{{sectie|json:4}}</pre>

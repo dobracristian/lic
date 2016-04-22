@@ -1,0 +1,11 @@
+<form>
+    <div class="form-group">
+        <label>Nume:</label>
+        <input type="text" class="form-control" ng-model="facultate.nume">
+    </div>
+</form>
+
+<button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+<button class="btn btn-primary" ng-click="add()" ng-show="!facultate.id">Adauga</button>
+<button class="btn btn-primary" ng-click="save()" ng-show="facultate.id">Salveaza</button>
+<br><pre>{{facultate|json:4}}</pre>

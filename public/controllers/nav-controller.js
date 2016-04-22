@@ -1,36 +1,36 @@
 angular.module('app').controller('NavController', function($scope){
     $scope.items = [{
         label: 'Facultati',
-        state: 'facultati'
+        state: 'admin.facultati'
     }, {
         label: 'Sectii',
-        state: 'sectii'
+        state: 'admin.sectii'
     }, {
         label: 'Serii',
-        state: 'serii'
+        state: 'admin.serii'
     }, {
         label: 'Grupe',
-        state: 'grupe'
+        state: 'admin.grupe'
     }, {
         label: 'Semigrupe',
-        state: 'semigrupe'
+        state: 'admin.semigrupe'
     }, {
         label: 'Studenti',
-        state: 'studenti'
+        state: 'admin.studenti'
     }, {
         label: 'Profesori',
-        state: 'profesori'
+        state: 'admin.profesori'
     }, {
         label: 'Materii',
-        state: 'materii'
+        state: 'admin.materii'
     }, {
         label: 'Cursuri',
-        state: 'cursuri'
+        state: 'admin.cursuri'
     }, {
         label: 'Laboratoare',
-        state: 'laboratoare'
+        state: 'admin.laboratoare'
     }, {
         label: 'Seminarii',
-        state: 'seminarii'
+        state: 'admin.seminarii'
     }];
 });

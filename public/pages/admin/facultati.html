@@ -1,0 +1,29 @@
+<pre>{{facultati|json:4}}</pre>
+
+<div ng-repeat="fac in facultati">
+    <b>{{fac.nume}}</b>
+    - {{fac.id}}
+</div>
+
+<div id="page-wrap">
+    <button class="btn btn-primary pull-right" ng-click="add()">Adauga facultate</button>
+    <table class="standard">
+        <tr>
+            <th>Facultate</th>
+            <th>Sectii</th>
+            <th>Actiuni</th>
+        </tr>
+        <tr ng-repeat="fac in facultati">
+            <td>{{fac.nume}}</td>
+            <td><a ui-sref="^.sectii({f: fac.id})">Vezi sectii</a></td>
+            <td class="act">
+                <a href ng-click="delete(fac.id)">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+                <a href ng-click="edit(fac)">
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

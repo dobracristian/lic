@@ -1,11 +1,12 @@
-angular.module('app').controller('AdminCursController', function($scope, Restangular) {
+angular.module('app').controller('CursController', function ($scope, $stateParams, Restangular) {
+    console.log('Salut');
 
-    $scope.add = function() {
-        Restangular.all('api/cursuri').post($scope.curs).then($scope.$close);
-    };
+    Restangular.one('/api/cursuri', $stateParams.id).get().then(function(response) {
+        $scope.curs = response.plain();
+    });
 
-    $scope.save = function() {
-        Restangular.one('api/cursuri', $scope.curs.id).customPUT($scope.curs).then($scope.$close);
-    }
+    Restangular.all('/api/fisiere').getList({c: $stateParams.id}).then(function(response) {
+        $scope.fisiere = response.plain();
+    });
 
-})
+});

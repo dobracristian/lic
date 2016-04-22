@@ -14,31 +14,43 @@ module.exports = function(server, getConnection) {
         var conn = getConnection();
 
         var query = 'SELECT studenti.*, semigrupe.nr_semigrupa as sem_nr, grupe.nr_grupa as gr_nr,' +
-            ' serii.nume as ser_nume, sectii.nume as sc_nume, facultati.nume as fac_nume' +
+            ' grupe.id as gr_id, serii.id as ser_id,' +
+            ' serii.nume as ser_nume, sectii.nume as sc_nume, sectii.id as sc_id,' +
+            ' facultati.nume as fac_nume, facultati.id as fac_id' +
             ' from studenti' +
             ' Inner join semigrupe on studenti.id_semigrupa=semigrupe.id' +
             ' Inner join grupe on semigrupe.id_grupa=grupe.id' +
             ' Inner join serii on grupe.id_serie=serii.id' +
             ' Inner join sectii on serii.id_sectie=sectii.id' +
             ' Inner join facultati on sectii.id_facultate=facultati.id';
+        var conditions = [];
+        var params = [];
         if(req.params.sem){
-            query += ' where id_semigrupa='+ req.params.sem;
+            conditions.push('semigrupe.id=?');
+            params.push(req.params.sem);
         }
         else if(req.params.gr){
-            query += ' where id_grupa=' + req.params.gr;
+            conditions.push('grupe.id=?');
+            params.push(req.params.gr);
         }
         else if(req.params.ser) {
-            query += ' where id_serie=' + req.params.ser;
+            conditions.push('serii.id=?');
+            params.push(req.params.ser);
         }
         else if(req.params.sc) {
-            query += ' where id_sectie=' + req.params.sc;
+            conditions.push('sectii.id=?');
+            params.push(req.params.sc);
         }
         else if(req.params.f) {
-            query += ' where id_facultate=' + req.params.f;
+            conditions.push('facultati.id=?');
+            params.push(req.params.f);
         }
-        query += ' order by nume, prenume';
+        if(conditions.length){
+            query += ' where '+ conditions.join(' and ');
+        }
+        query += ' order by studenti.nume, studenti.prenume';
 
-        conn.query(query, function(err, rows){
+        conn.query(query, params, function(err, rows){
 
             conn.end();
             if (err) throw err;

@@ -18,9 +18,9 @@ module.exports = function(server, getConnection) {
             ' from sectii' +
             ' INNER JOIN facultati ON sectii.id_facultate=facultati.id';
         if(req.params.f) {
-            query += ' where id_facultate=' + req.params.f;
+            query += ' where facultati.id=' + req.params.f;
         }
-        query += ' order by nume';
+        query += ' order by sectii.nume';
 
         conn.query(query, function(err, rows){
 

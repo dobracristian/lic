@@ -1,0 +1,43 @@
+<div id="page-wrap">
+
+    <button class="btn btn-primary pull-right" ng-click="add()" ng-disabled="!filters.ser">Adauga grupa</button>
+    <form class="form-inline">
+        <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
+            <option value="">Facultate...</option>
+        </select>
+
+        <select class="form-control" ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii" ng-disabled="!filters.f">
+            <option value="">Sectie...</option>
+        </select>
+
+        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
+            <option value="">Serie...</option>
+        </select>
+    </form>
+
+    <table class="standard">
+        <tr>
+            <th ng-if="!filters.f">Facultate</th>
+            <th ng-if="!filters.sc">Sectie</th>
+            <th ng-if="!filters.ser">Serie</th>
+            <th>Grupa</th>
+            <th>Semigrupe</th>
+            <th>Actiuni</th>
+        </tr>
+        <tr ng-repeat="grupe in grupe">
+            <td ng-if="!filters.f">{{grupe.fac_nume}}</td>
+            <td ng-if="!filters.sc">{{grupe.sc_nume}}</td>
+            <td ng-if="!filters.ser">{{grupe.ser_nume}}</td>
+            <td>{{grupe.nr_grupa}}</td>
+            <td><a ui-sref="^.semigrupe({gr: grupe.id, ser: grupe.id_serie, sc: grupe.id_sectie, f: grupe.fac_id})">Vezi semigrupe</a></td>
+            <td class="act">
+                <a href ng-click="delete(grupe.id)">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+                <a href ng-click="edit(grupe)">
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

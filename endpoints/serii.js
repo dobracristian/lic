@@ -3,7 +3,8 @@ module.exports = function(server, getConnection){
     function getSerie(body) {
         return  {
             nume:      body.nume,
-            id_sectie: body.id_sectie
+            id_sectie: body.id_sectie,
+            an:        body.an
         };
     }
 
@@ -12,19 +13,26 @@ module.exports = function(server, getConnection){
 
         var conn = getConnection();
 
-        var query = 'SELECT serii.*, sectii.nume as sc_nume, facultati.nume as fac_nume'+
+        var query = 'SELECT serii.*, sectii.nume as sc_nume, facultati.nume as fac_nume, facultati.id as fac_id'+
                 ' from serii'+
                 ' Inner join sectii on serii.id_sectie=sectii.id'+
                 ' Inner join facultati on sectii.id_facultate=facultati.id';
+        var conditions = [];
+        var params = [];
         if(req.params.sc) {
-            query += ' where id_sectie=' + req.params.sc;
+            conditions.push('sectii.id=?');
+            params.push(req.params.sc);
         }
         else if(req.params.f) {
-            query += ' where id_facultate=' + req.params.f;
+            conditions.push('facultati.id=?');
+            params.push(req.params.f);
         }
-        query += ' order by nume';
+        if(conditions.length){
+            query += ' where '+ conditions.join(' and ');
+        }
+        query += ' order by serii.nume';
 
-        conn.query(query, function(err, rows){
+        conn.query(query, params, function(err, rows){
 
             conn.end();
             if (err) throw err;
@@ -36,13 +44,13 @@ module.exports = function(server, getConnection){
     server.post('/api/serii', function (req, res){
 
         var conn = getConnection();
-        var serii = getSerie(req.body);
-        conn.query('INSERT into serii set ?', serii, function(err, result) {
+        var serie = getSerie(req.body);
+        conn.query('INSERT into serii set ?', serie, function(err, result) {
 
             conn.end();
             if (err) throw err;
-            serii.id = result.insertId;
-            res.send(serii);
+            serie.id = result.insertId;
+            res.send(serie);
         });
     });
 
@@ -62,9 +70,9 @@ module.exports = function(server, getConnection){
     server.put('/api/serii/:id', function (req, res){
 
         var conn = getConnection();
-        var serii = getSerie(req.body);
+        var serie = getSerie(req.body);
 
-        conn.query('Update serii set ? where id=?', [serii, req.params.id], function(err) {
+        conn.query('Update serii set ? where id=?', [serie, req.params.id], function(err) {
 
             conn.end();
             if (err) throw err;

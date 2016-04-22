@@ -1,0 +1,42 @@
+<form>
+    <div class="form-group">
+        <label>Nume:</label>
+        <input type="text" class="form-control" ng-model="student.nume">
+    </div>
+    <div class="form-group">
+        <label>Prenume:</label>
+        <input type="text" class="form-control" ng-model="student.prenume">
+    </div>
+    <div class="form-group" ng-if="student.id">
+        <label>Facultate:</label>
+        <select class="form-control" ng-model="student.fac_id" ng-options="f.id as f.nume for f in facultati">
+        </select>
+    </div>
+    <div class="form-group" ng-if="student.id">
+        <label>Sectie:</label>
+        <select class="form-control" ng-model="student.sc_id" ng-options="sc.id as sc.nume for sc in sectii">
+            <option value="">Alege sectia</option>
+        </select>
+    </div>
+    <div class="form-group" ng-if="student.id">
+        <label>Serie:</label>
+        <select class="form-control" ng-model="student.ser_id" ng-options="ser.id as ser.nume for ser in serii">
+        </select>
+    </div>
+    <div class="form-group" ng-if="student.id">
+        <label>Grupa:</label>
+        <select class="form-control" ng-model="student.gr_id" ng-options="gr.id as gr.nr_grupa for gr in grupe">
+        </select>
+    </div>
+    <div class="form-group" ng-if="student.id">
+        <label>Semigrupa:</label>
+        <select class="form-control" ng-model="student.id_semigrupa" ng-options="sem.id as sem.nr_semigrupa for sem in semigrupe">
+        </select>
+    </div>
+
+</form>
+
+<button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+<button class="btn btn-primary" ng-click="add()" ng-show="!student.id">Adauga</button>
+<button class="btn btn-primary" ng-click="save()" ng-show="student.id">Salveaza</button>
+<br><pre>{{student|json:4}}</pre>

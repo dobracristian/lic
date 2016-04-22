@@ -13,18 +13,64 @@ module.exports = function(server, getConnection){
     server.get('/api/cursuri', function(req, res) {
 
         var conn = getConnection();
-        conn.query('SELECT cursuri.*, materii.nume as mat_nume, profesori.nume as prof_nume,' +
-            ' profesori.prenume as prof_pren, sectii.nume as sc_nume, serii.nume as ser_nume' +
+        var query = 'SELECT cursuri.*, materii.nume as mat_nume, profesori.nume as prof_nume,' +
+            ' profesori.prenume as prof_pren, sectii.nume as sc_nume, serii.nume as ser_nume,' +
+            ' facultati.nume as fac_nume' +
             ' from cursuri' +
             ' Inner join materii on cursuri.id_materie=materii.id' +
             ' Inner join serii on cursuri.id_serie=serii.id' +
             ' Inner join profesori on cursuri.id_prof=profesori.id' +
             ' Inner join sectii on serii.id_sectie=sectii.id' +
-            ' order by nume', function(err, rows){
+            ' Inner join facultati on sectii.id_facultate=facultati.id';
+
+        var conditions = [];
+        var params = [];
+        if(req.params.ser) {
+            conditions.push('serii.id=?');
+            params.push(req.params.ser);
+        }
+        else if(req.params.sc) {
+            conditions.push('sectii.id=?');
+            params.push(req.params.sc);
+        }
+        else if(req.params.f) {
+            conditions.push('facultati.id=?');
+            params.push(req.params.f);
+        }
+
+        if(req.params.mat) {
+            conditions.push('materii.id=?');
+            params.push(req.params.mat);
+        }
+
+        if(req.params.prof) {
+            conditions.push('profesori.id=?');
+            params.push(req.params.prof);
+        }
+
+        if(conditions.length) {
+            query += ' where '+ conditions.join(' and ');
+        }
+
+        query +=' order by cursuri.nume';
+        conn.query(query, params, function(err, rows){
 
             conn.end();
             if (err) throw err;
             res.send(rows);
+        });
+    });
+
+    server.get('/api/cursuri/:id', function (req, res){
+
+        var conn = getConnection();
+        var query = 'Select * from cursuri where id=? ';
+
+        conn.query(query,[req.params.id], function(err, rows) {
+
+            conn.end();
+            if (err) throw err;
+            res.send(200, rows[0]);
         });
     });
 
@@ -34,11 +80,12 @@ module.exports = function(server, getConnection){
         var conn = getConnection();
         var curs = getCurs(req.body);
         console.log('Adaugare curs', curs);
+
         conn.query('INSERT into cursuri set ?', curs, function(err, result) {
 
             conn.end();
             if (err) throw err;
-            cursuri.id = result.insertId;
+            curs.id = result.insertId;
             res.send(curs);
         });
     });
@@ -68,4 +115,5 @@ module.exports = function(server, getConnection){
             res.send(200, 'Updated');
         });
     });
+
 };

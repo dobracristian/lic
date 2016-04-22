@@ -1,0 +1,18 @@
+<div id="page-wrap">
+    <button class="btn btn-primary pull-right" ng-click="add()">Adauga profesor</button>
+    <table class="standard">
+        <tr>
+            <th>Nume</th>
+            <th>Prenume</th>
+            <th>Actiuni</th>
+        </tr>
+        <tr ng-repeat="profesor in profesori">
+            <td>{{profesor.nume}}</td>
+            <td>{{profesor.prenume}}</td>
+            <td class="act">
+                <a href ng-click="delete(profesor.id)" title="Sterge"><i class="fa fa-times-circle"></i></a>
+                <a href ng-click="edit(profesor)" title="Editare"><i class="fa fa-pencil-square"></i></a>
+            </td>
+        </tr>
+    </table>
+</div>

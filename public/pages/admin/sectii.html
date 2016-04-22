@@ -1,0 +1,32 @@
+<div id="page-wrap">
+
+    <button class="btn btn-primary pull-right" ng-click="add()" ng-disabled="!filters.f">Adauga sectie</button>
+    <form class="form-inline">
+        <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
+            <option value="">Facultate...</option>
+        </select>
+    </form>
+
+    <table class="standard">
+        <tr>
+            <th ng-if="!filters.f">Facultate</th>
+            <th>Sectie</th>
+            <th>Serii</th>
+            <th>Actiuni</th>
+        </tr>
+        <tr ng-repeat="sectie in sectii">
+            <td ng-if="!filters.f">{{sectie.fac_nume}}</td>
+            <td>{{sectie.nume}}</td>
+            <td><a ui-sref="^.serii({sc: sectie.id, f: sectie.id_facultate})">Vezi serii</a></td>
+            <td class="act">
+                <a href ng-click="delete(sectie.id)">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+                <a href ng-click="edit(sectie)">
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+    xxx{{filters}}
+</div>

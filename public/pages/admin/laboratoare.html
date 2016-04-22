@@ -1,0 +1,66 @@
+<div id="page-wrap">
+    <button class="btn btn-primary pull-right" ng-click="add()"
+            ng-disabled="!filters.sem || !filters.curs || !filters.prof">Adauga laborator</button>
+    <form class="form-inline">
+        <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
+            <option value="">Facultate...</option>
+        </select>
+        <i class="fa fa-arrow-right"></i>
+        <select class="form-control" ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii" ng-disabled="!filters.f">
+            <option value="">Sectie...</option>
+        </select>
+        <i class="fa fa-arrow-right"></i>
+        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
+            <option value="">Serie...</option>
+        </select>
+        <i class="fa fa-arrow-right"></i>
+        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nr_grupa for gr in grupe" ng-disabled="!filters.ser">
+            <option value="">Grupa...</option>
+        </select>
+        <i class="fa fa-arrow-right"></i>
+        <select class="form-control" ng-model="filters.sem" ng-options="sem.id as sem.nr_semigrupa for sem in semigrupe" ng-disabled="!filters.gr">
+            <option value="">Semigrupe...</option>
+        </select>
+        <i class="fa fa-bars"></i>
+        <select class="form-control" ng-model="filters.curs" ng-options="curs.id as curs.nume for curs in cursuri">
+            <option value="">Cursuri...</option>
+        </select>
+        <i class="fa fa-bars"></i>
+        <select class="form-control" ng-model="filters.prof" ng-options="prof.id as prof.nume + ',' + prof.prenume for prof in profesori">
+            <option value="">Profesori...</option>
+        </select>
+    </form>
+    <table class="standard">
+        <tr>
+            <th ng-if="!filters.f">Facultate</th>
+            <th ng-if="!filters.sc">Sectie</th>
+            <th ng-if="!filters.ser">Serie</th>
+            <th ng-if="!filters.gr">Grupa</th>
+            <th ng-if="!filters.sem">Semigrupa</th>
+            <th ng-if="!filters.curs">Curs</th>
+            <th>Laborator</th>
+            <th ng-if="!filters.prof">Profesor</th>
+            <th>Actiuni</th>
+        </tr>
+        <tr ng-repeat="laborator in laboratoare">
+            <td ng-if="!filters.f">{{laborator.fac_nume}}</td>
+            <td ng-if="!filters.sc">{{laborator.sc_nume}}</td>
+            <td ng-if="!filters.ser">{{laborator.ser_nume}}</td>
+            <td ng-if="!filters.gr">{{laborator.nr_gr}}</td>
+            <td ng-if="!filters.sem">{{laborator.nr_sem}}</td>
+            <td ng-if="!filters.curs">{{laborator.curs_nume}}</td>
+            <td>{{laborator.nume}}</td>
+            <td ng-if="!filters.prof">{{laborator.prof_nume}}
+                {{laborator.prof_pren}}
+            </td>
+            <td class="act">
+                <a href ng-click="delete(laborator.id)">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+                <a href ng-click="edit(laborator)">
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

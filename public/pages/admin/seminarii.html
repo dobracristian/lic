@@ -1,0 +1,61 @@
+<div id="page-wrap">
+
+    <button class="btn btn-primary pull-right" ng-click="add()"
+            ng-disabled="!filters.curs || !filters.gr || !filters.prof">Adauga seminar</button>
+    <form class="form-inline">
+        <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
+            <option value="">Facultate...</option>
+        </select>
+        <i class="fa fa-arrow-right"></i>
+        <select class="form-control" ng-model="filters.sc" ng-options="sc.id as sc.nume for sc in sectii" ng-disabled="!filters.f">
+            <option value="">Sectie...</option>
+        </select>
+        <i class="fa fa-arrow-right"></i>
+        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
+            <option value="">Serie...</option>
+        </select>
+        <i class="fa fa-arrow-right"></i>
+        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nr_grupa for gr in grupe" ng-disabled="!filters.ser">
+            <option value="">Grupe...</option>
+        </select>
+        <i class="fa fa-bars"></i>
+        <select class="form-control" ng-model="filters.curs" ng-options="curs.id as curs.nume for curs in cursuri">
+            <option value="">Cursuri...</option>
+        </select>
+        <i class="fa fa-bars"></i>
+        <select class="form-control" ng-model="filters.prof" ng-options="prof.id as prof.nume+ ', ' + prof.prenume for prof in profesori">
+            <option value="">Profesor...</option>
+        </select>
+    </form>
+    <table class="standard">
+        <tr>
+            <th ng-if="!filters.f">Facultate</th>
+            <th ng-if="!filters.sc">Sectie</th>
+            <th ng-if="!filters.ser">Serie</th>
+            <th ng-if="!filters.gr">Grupa</th>
+            <th ng-if="!filters.curs">Curs</th>
+            <th>Seminar</th>
+            <th ng-if="!filters.prof">Profesor</th>
+            <th>Actiuni</th>
+        </tr>
+        <tr ng-repeat="seminar in seminarii">
+            <td ng-if="!filters.f">{{seminar.fac_nume}}</td>
+            <td ng-if="!filters.sc">{{seminar.sc_nume}}</td>
+            <td ng-if="!filters.ser">{{seminar.ser_nume}}</td>
+            <td ng-if="!filters.gr">{{seminar.nr_gr}}</td>
+            <td  ng-if="!filters.curs">{{seminar.curs_nume}}</td>
+            <td>{{seminar.nume}}</td>
+            <td ng-if="!filters.prof">{{seminar.prof_nume}}
+                {{seminar.prof_pren}}
+            </td>
+            <td class="act">
+                <a href ng-click="delete(seminar.id)">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+                <a href ng-click="edit(seminar)">
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
