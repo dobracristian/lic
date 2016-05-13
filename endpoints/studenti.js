@@ -25,9 +25,9 @@ module.exports = function(server, getConnection) {
             ' Inner join facultati on sectii.id_facultate=facultati.id';
         var conditions = [];
         var params = [];
-        if(req.params.sem){
+        if(req.params.sgr){
             conditions.push('semigrupe.id=?');
-            params.push(req.params.sem);
+            params.push(req.params.sgr);
         }
         else if(req.params.gr){
             conditions.push('grupe.id=?');

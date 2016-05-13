@@ -3,6 +3,8 @@ console.log('salut');
 var restify = require('restify');
 //console.log('Modul', restify);
 
+
+
 var server = restify.createServer();
 server.use(restify.bodyParser());
 server.use(restify.queryParser());
@@ -43,6 +45,9 @@ require('./endpoints/laboratoare.js')(server, getConnection);
 require('./endpoints/profesori.js')(server, getConnection);
 require('./endpoints/fisiere.js')(server, getConnection);
 require('./endpoints/student/curs-lab-sem.js')(server, getConnection);
+require('./endpoints/profesor/cursuri.js')(server, getConnection);
+require('./endpoints/profesor/laboratoare.js')(server, getConnection);
+require('./endpoints/profesor/seminarii.js')(server, getConnection);
 
 server.listen(8080, function() {
     console.log('listening', server.name, server.url);

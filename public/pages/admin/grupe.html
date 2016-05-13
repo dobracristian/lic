@@ -10,7 +10,7 @@
             <option value="">Sectie...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
+        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume+ ' An ' + ser.an for ser in serii" ng-disabled="!filters.sc">
             <option value="">Serie...</option>
         </select>
     </form>

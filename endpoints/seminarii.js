@@ -78,6 +78,18 @@ module.exports = function(server, getConnection){
         });
     });
 
+    server.get('/api/seminarii/:id', function(req, res) {
+
+        var conn = getConnection();
+        var query = 'select * from seminarii where id=? ';
+
+        conn.query(query, [req.params.id], function(err, rows) {
+            conn.end();
+            if (err) throw err;
+            res.send(200, rows[0]);
+        })
+    });
+
     //Stergere din lista de seminarii
     server.del('/api/seminarii/:id', function (request, response){
 

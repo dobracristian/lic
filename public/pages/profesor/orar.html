@@ -1,0 +1,23 @@
+<form>
+    <div class="form-group">
+        <label>Cursuri:</label>
+        <select class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label>Laboratoare:</label>
+        <select class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label>Seminarii:</label>
+        <select class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label>Descriere</label>
+        <input type="text" class="form-control">
+    </div>
+
+</form>
+<button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+<button class="btn btn-primary" ng-click="add()">Adauga</button>
+<button class="btn btn-primary" ng-click="save()">Salveaza</button>
+<br><pre>{{student|json:4}}</pre>

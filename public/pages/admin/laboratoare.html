@@ -1,6 +1,6 @@
 <div id="page-wrap">
     <button class="btn btn-primary pull-right" ng-click="add()"
-            ng-disabled="!filters.sem || !filters.curs || !filters.prof">Adauga laborator</button>
+            ng-disabled="!filters.sgr || !filters.curs || !filters.prof">Adauga laborator</button>
     <form class="form-inline">
         <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
             <option value="">Facultate...</option>
@@ -18,7 +18,7 @@
             <option value="">Grupa...</option>
         </select>
         <i class="fa fa-arrow-right"></i>
-        <select class="form-control" ng-model="filters.sem" ng-options="sem.id as sem.nr_semigrupa for sem in semigrupe" ng-disabled="!filters.gr">
+        <select class="form-control" ng-model="filters.sgr" ng-options="sgr.id as sgr.nr_semigrupa for sgr in semigrupe" ng-disabled="!filters.gr">
             <option value="">Semigrupe...</option>
         </select>
         <i class="fa fa-bars"></i>
@@ -36,7 +36,7 @@
             <th ng-if="!filters.sc">Sectie</th>
             <th ng-if="!filters.ser">Serie</th>
             <th ng-if="!filters.gr">Grupa</th>
-            <th ng-if="!filters.sem">Semigrupa</th>
+            <th ng-if="!filters.sgr">Semigrupa</th>
             <th ng-if="!filters.curs">Curs</th>
             <th>Laborator</th>
             <th ng-if="!filters.prof">Profesor</th>
@@ -47,7 +47,7 @@
             <td ng-if="!filters.sc">{{laborator.sc_nume}}</td>
             <td ng-if="!filters.ser">{{laborator.ser_nume}}</td>
             <td ng-if="!filters.gr">{{laborator.nr_gr}}</td>
-            <td ng-if="!filters.sem">{{laborator.nr_sem}}</td>
+            <td ng-if="!filters.sgr">{{laborator.nr_sem}}</td>
             <td ng-if="!filters.curs">{{laborator.curs_nume}}</td>
             <td>{{laborator.nume}}</td>
             <td ng-if="!filters.prof">{{laborator.prof_nume}}

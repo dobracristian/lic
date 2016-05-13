@@ -1,0 +1,104 @@
+{{cursuri}}
+<br>
+{{laboratoare}}
+<br>
+{{seminarii}}
+
+<table class="standard">
+    <tr>
+        <th>Cursuri</th>
+    </tr>
+    <tr ng-repeat="curs in cursuri">
+        <td><a ui-sref="curs({id: curs.id})">{{curs.nume}}</a></td>
+    </tr>
+</table>
+
+<table class="standard">
+    <tr>
+        <th>Laboratoare</th>
+    </tr>
+    <tr ng-repeat="lab in laboratoare">
+        <td><a ui-sref="laborator({id: lab.id})">{{lab.nume}}</a></td>
+    </tr>
+</table>
+
+<table class="standard">
+    <tr>
+        <th>Seminarii</th>
+    </tr>
+    <tr ng-repeat="sem in seminarii">
+        <td><a ui-sref="seminar({id: sem.id})">{{sem.nume}}</a></td>
+    </tr>
+</table>
+
+
+<table class="calendar table table-bordered">
+    <thead>
+    <tr>
+        <th></th>
+        <th width="20%">Luni</th>
+        <th width="20%">Marti</th>
+        <th width="20%">Miercuri</th>
+        <th width="20%">Joi</th>
+        <th width="20%">Vineri</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>08:00</td>
+        <td ng-dblclick="openFilePopup()"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr ng-repeat="curs in cursuri">
+        <td>10:00</td>
+        <td class="event" ng-dblclick="openFilePopup()">
+            <a class="title" ui-sref="curs({id: curs.id})">{{curs.nume}}</a>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>12:00</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>14:00</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>16:00</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>18:00</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    </tbody>
+</table>

@@ -1,3 +1,4 @@
+{{cursuri}}
 <table class="standard">
     <tr>
         <th>Cursuri</th>
@@ -5,8 +6,33 @@
         <th>Laboratoare</th>
     </tr>
     <tr ng-repeat="curs in cursuri">
-        <td>{{curs.curs_nume}}</td>
-        <td>{{curs.lab_nume}}</td>
-        <td>{{curs.sem_nume}}</td>
+        <td><a ui-sref="curs({id: curs.curs_id})">{{curs.curs_nume}}</a></td>
+        <td><a ui-sref="seminar({id: curs.sem_id})">{{curs.sem_nume}}</a></td>
+        <td><a ui-sref="laborator({id: curs.lab_id})">{{curs.lab_nume}}</a></td>
     </tr>
 </table>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#/login" class="navbar-brand">Login</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navHead">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navHead">
+
+            <ul class="nav navbar-nav navbar-right">
+
+                        <li class="menuItem"><a href>An I</a></li>
+                        <li class="menuItem"><a href>An II</a></li>
+                        <li class="menuItem"><a href>An III</a></li>
+                        <li class="menuItem"><a href>An IV</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+

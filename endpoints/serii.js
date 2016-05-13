@@ -30,7 +30,7 @@ module.exports = function(server, getConnection){
         if(conditions.length){
             query += ' where '+ conditions.join(' and ');
         }
-        query += ' order by serii.nume';
+        query += ' order by serii.nume, serii.an';
 
         conn.query(query, params, function(err, rows){
 

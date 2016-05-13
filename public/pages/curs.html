@@ -1,8 +1,33 @@
 <h1>{{curs.nume}}</h1>
 
+<div id="page-wrap">
+    <h3>Suport curs</h3>
+    <table class="table table-striped">
+        <tr ng-repeat="fisier in fisiere | filter:{tip: 'suport'}">
+            <td>
+                <a target="_blank" href="{{fisier.url}}">{{fisier.nume}}</a>
+            </td>
+            <td class="act col-md-3 col-md-offset-3">
+            <button type="button" class="btn btn-danger" ng-click="delete(fisier.id)">Sterge</button>
+            <button type="button" class="btn btn-primary" ng-click="edit(fisier)">Editare</button>
+            </td>
+        </tr>
+    </table>
+    <button class="btn btn-primary" ng-click="openFilePopup('suport')" ng-show="1 || USER.role==='profesor'">Adauga fisier</button>
 
-<h3>Fisiere</h3>
-<button class="btn btn-primary" ng-click="add()" ng-show="USER.role==='profesor'">Adauga fisier</button>
-<ul>
-    <li ng-repeat="fisier in fisiere">{{fisier.nume}}</li>
-</ul>
+    <h3>Note</h3>
+    <table class="table table-striped">
+        <tr ng-repeat="fisier in fisiere | filter:{tip: 'note'}">
+            <td>
+                <a target="_blank" href="{{fisier.url}}">{{fisier.nume}}</a>
+            </td>
+            <td class="act col-md-3 col-md-offset-3">
+            <button type="button" class="btn btn-danger" ng-click="delete(fisier.id)">Sterge</button>
+            <button type="button" class="btn btn-primary" ng-click="edit(fisier)">Editare</button>
+            </td>
+        </tr>
+    </table>
+    <button class="btn btn-primary" ng-click="openFilePopup('note')" ng-show="1 || USER.role==='profesor'">Adauga fisier</button>
+</div>
+
+

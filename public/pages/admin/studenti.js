@@ -1,26 +1,23 @@
 angular.module('app').controller('StudentiController', function($scope, Restangular, $stateParams, $uibModal, L){
-    console.log('Salut!', $stateParams.sem);
+    console.log('Salut!', $stateParams.sgr);
     $scope.filters = {
-        sem: Number($stateParams.sem) || null,
+        sgr: Number($stateParams.sgr) || null,
         gr: Number($stateParams.gr) || null,
         ser: Number($stateParams.ser) || null,
         sc: Number($stateParams.sc) || null,
         f: Number($stateParams.f) || null
     };
-    //loadSectii();
-    loadSerii();
-    loadGrupe();
-    loadSemigrupe();
+
 
     L.facultati($scope, 'facultati');
 
-    $scope.$watch('filters.sem', loadStudenti);
+    $scope.$watch('filters.sgr', loadStudenti);
     $scope.$watch('filters.gr', function() {
         if(!$scope.filters.gr) {
-            $scope.filters.sem = null;
+            $scope.filters.sgr = null;
         }
         else {
-            loadSemigrupe();
+            L.semigrupe($scope, 'semigrupe', $scope.filters.gr)
         }
         loadStudenti();
     });
@@ -29,7 +26,7 @@ angular.module('app').controller('StudentiController', function($scope, Restangu
             $scope.filters.gr = null;
         }
         else {
-            loadGrupe();
+            L.grupe($scope, 'grupe', $scope.filters.ser)
         }
         loadStudenti();
     });
@@ -38,7 +35,7 @@ angular.module('app').controller('StudentiController', function($scope, Restangu
             $scope.filters.ser = null;
         }
         else {
-            loadSerii();
+            L.serii($scope, 'serii', $scope.filters.sc)
         }
         loadStudenti();
     });
@@ -54,37 +51,13 @@ angular.module('app').controller('StudentiController', function($scope, Restangu
 
     function loadStudenti(){
         Restangular.all('api/studenti').getList({
-            sem: $scope.filters.sem,
+            sgr: $scope.filters.sgr,
             gr: $scope.filters.gr,
             ser: $scope.filters.ser,
             sc: $scope.filters.sc,
             f: $scope.filters.f
         }).then(function(response) {
             $scope.studenti = response.plain();
-        });
-    }
-
-    function loadSemigrupe() {
-        Restangular.all('api/semigrupe').getList({
-            gr: $scope.filters.gr
-        }).then(function (response) {
-            $scope.semigrupe = response.plain();
-        });
-    }
-
-    function loadGrupe() {
-        Restangular.all('api/grupe').getList({
-            ser: $scope.filters.ser
-        }).then(function (response) {
-            $scope.grupe = response.plain();
-        });
-    }
-
-    function loadSerii() {
-        Restangular.all('api/serii').getList({
-            sc: $scope.filters.sc
-        }).then(function (response) {
-            $scope.serii = response.plain();
         });
     }
 
@@ -121,7 +94,7 @@ angular.module('app').controller('StudentiController', function($scope, Restangu
             id_facultate: $scope.filters.f,
             id_serie:     $scope.filters.ser,
             id_grupa:     $scope.filters.gr,
-            id_semigrupa: $scope.filters.sem
+            id_semigrupa: $scope.filters.sgr
         };
 
         var modalInstance = $uibModal.open({

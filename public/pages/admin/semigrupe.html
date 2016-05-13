@@ -10,7 +10,7 @@
             <option value="">Sectie...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
+        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume+ ' An ' + ser.an for ser in serii" ng-disabled="!filters.sc">
             <option value="">Serie...</option>
         </select>
 
@@ -35,7 +35,7 @@
             <td ng-if="!filters.ser">{{semigrupe.ser_nume}}</td>
             <td ng-if="!filters.gr">{{semigrupe.gr_nr}}</td>
             <td>{{semigrupe.nr_semigrupa}}</td>
-            <td><a ui-sref="^.studenti({sem: semigrupe.id, gr: semigrupe.id_grupa, ser: semigrupe.id_serie,
+            <td><a ui-sref="^.studenti({sgr: semigrupe.id, gr: semigrupe.id_grupa, ser: semigrupe.id_serie,
              sc: semigrupe.id_sectie, f: semigrupe.fac_id})">Vezi studenti</a></td>
             <td class="act">
                 <a href ng-click="delete(semigrupe.id)">

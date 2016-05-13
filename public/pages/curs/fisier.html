@@ -1,0 +1,16 @@
+<form name="fisierForm">
+    <div class="form-group">
+        <label>Nume:</label>
+        <input type="text" class="form-control" ng-model="fisier.nume" required>
+    </div>
+    <div class="form-group">
+        <label>Url:</label>
+        <input type="url" class="form-control" ng-model="fisier.url" required>
+    </div>
+
+
+    <button class="btn btn-primary" ng-click="addFile($close)" ng-disabled="fisierForm.$invalid" ng-show="!fisier.id">Adauga</button>
+    <button class="btn btn-primary" ng-click="save($close)" ng-show="fisier.id">Salveaza</button>
+    <button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+</form>
+<br><pre>{{fisier|json: 4}}</pre>

@@ -11,7 +11,7 @@ angular.module('app').controller('LoginController', function($scope, $state, $ro
         }
         else if(username === 'profesor') {
             window.role = 'profesor';
-            $state.go('curs', {id: 1});
+            $state.go('profesor');
         }
 
         $rootScope.USER = {

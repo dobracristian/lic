@@ -21,16 +21,19 @@
     <div class="form-group" ng-if="student.id">
         <label>Serie:</label>
         <select class="form-control" ng-model="student.ser_id" ng-options="ser.id as ser.nume for ser in serii">
+            <option value="">Alege seria</option>
         </select>
     </div>
     <div class="form-group" ng-if="student.id">
         <label>Grupa:</label>
         <select class="form-control" ng-model="student.gr_id" ng-options="gr.id as gr.nr_grupa for gr in grupe">
+            <option value="">Alege grupa</option>
         </select>
     </div>
     <div class="form-group" ng-if="student.id">
         <label>Semigrupa:</label>
-        <select class="form-control" ng-model="student.id_semigrupa" ng-options="sem.id as sem.nr_semigrupa for sem in semigrupe">
+        <select class="form-control" ng-model="student.id_semigrupa" ng-options="sgr.id as sgr.nr_semigrupa for sgr in semigrupe">
+            <option value="">Alege semigrupa</option>
         </select>
     </div>
 

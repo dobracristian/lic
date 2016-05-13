@@ -26,9 +26,9 @@ module.exports = function(server, getConnection){
             ' Inner join facultati on sectii.id_facultate=facultati.id';
         var conditions = [];
         var params = [];
-        if(req.params.sem){
+        if(req.params.sgr){
             conditions.push('semigrupe.id=?');
-            params.push(req.params.sem);
+            params.push(req.params.sgr);
         }
         else if(req.params.gr){
             conditions.push('grupe.id=?');
@@ -47,14 +47,14 @@ module.exports = function(server, getConnection){
             params.push(req.params.f);
         }
 
-        if(req.params.curs) {
-            conditions.push('cursuri.id=?');
-            params.push(req.params.curs);
-        }
-
         if(req.params.prof) {
             conditions.push('profesori.id=?');
             params.push(req.params.prof);
+        }
+
+        if(req.params.curs) {
+            conditions.push('cursuri.id=?');
+            params.push(req.params.curs);
         }
 
         if(conditions.length) {
@@ -66,6 +66,18 @@ module.exports = function(server, getConnection){
             conn.end();
             if (err) throw err;
             res.send(rows);
+        });
+    });
+
+    server.get('/api/laboratoare/:id', function(req, res) {
+
+        var conn = getConnection();
+        var query = 'select * from laboratoare where id=? ';
+
+        conn.query(query, [req.params.id], function(err, rows) {
+            conn.end();
+            if (err) throw err;
+            res.send(200, rows[0]);
         });
     });
 

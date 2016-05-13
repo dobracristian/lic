@@ -2,7 +2,7 @@ angular.module('app').controller('LaboratoareController', function($scope, Resta
     console.log('Salut!');
 
     $scope.filters = {
-        sem: Number($stateParams.sem) || null,
+        sgr: Number($stateParams.sgr) || null,
         gr: Number($stateParams.gr) || null,
         ser: Number($stateParams.ser) || null,
         sc: Number($stateParams.sc) || null,
@@ -17,24 +17,24 @@ angular.module('app').controller('LaboratoareController', function($scope, Resta
         $scope.facultati = response.plain();
     });
 
-    $scope.$watch('filters.curs', loadLaboratoare)
+    $scope.$watch('filters.curs', loadLaboratoare);
     function loadCursuri() {
         Restangular.all('api/cursuri').getList().then(function(response) {
             $scope.cursuri = response.plain();
         });
     }
 
-    $scope.$watch('filters.prof', loadLaboratoare)
+    $scope.$watch('filters.prof', loadLaboratoare);
     function loadProfesori() {
         Restangular.all('api/profesori').getList().then(function(response) {
             $scope.profesori = response.plain();
         });
     }
 
-    $scope.$watch('filters.sem', loadLaboratoare);
+    $scope.$watch('filters.sgr', loadLaboratoare);
     $scope.$watch('filters.gr', function() {
         if(!$scope.filters.gr) {
-            $scope.filters.sem = null;
+            $scope.filters.sgr = null;
         }
         else {
             loadSemigrupe();
@@ -123,12 +123,6 @@ angular.module('app').controller('LaboratoareController', function($scope, Resta
             templateUrl: 'pages/admin/laborator.html',
             controller: 'AdminLaboratorController',
             scope: modalScope
-            //size: size,
-            //resolve: {
-            //    items: function () {
-            //        return $scope.items;
-            //    }
-            //}
         }).result.then(loadLaboratoare);
     };
 
@@ -140,7 +134,7 @@ angular.module('app').controller('LaboratoareController', function($scope, Resta
             id_facultate: $scope.filters.f,
             id_serie:     $scope.filters.ser,
             id_grupa:     $scope.filters.gr,
-            id_semigrupa: $scope.filters.sem,
+            id_semigrupa: $scope.filters.sgr,
             id_curs:      $scope.filters.curs,
             id_prof:      $scope.filters.prof
         };

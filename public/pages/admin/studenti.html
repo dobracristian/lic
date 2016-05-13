@@ -1,6 +1,6 @@
 <div id="page-wrap">
 
-    <button class="btn btn-primary pull-right" ng-click="add()" ng-disabled="!filters.sem">Adauga student</button>
+    <button class="btn btn-primary pull-right" ng-click="add()" ng-disabled="!filters.sgr">Adauga student</button>
     <form class="form-inline">
         <select class="form-control" ng-model="filters.f" ng-options="f.id as f.nume for f in facultati">
             <option value="">Facultate...</option>
@@ -10,7 +10,7 @@
             <option value="">Sectie...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
+        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume+ ' An ' + ser.an for ser in serii" ng-disabled="!filters.sc">
             <option value="">Serie...</option>
         </select>
 
@@ -18,7 +18,7 @@
             <option value="">Grupa...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.sem" ng-options="sem.id as sem.nr_semigrupa for sem in semigrupe" ng-disabled="!filters.gr">
+        <select class="form-control" ng-model="filters.sgr" ng-options="sgr.id as sgr.nr_semigrupa for sgr in semigrupe" ng-disabled="!filters.gr">
             <option value="">Semigrupe...</option>
         </select>
     </form>
@@ -29,7 +29,7 @@
             <th ng-if="!filters.sc">Sectie</th>
             <th ng-if="!filters.ser">Serie</th>
             <th ng-if="!filters.gr">Grupa</th>
-            <th ng-if="!filters.sem">Semigrupa</th>
+            <th ng-if="!filters.sgr">Semigrupa</th>
             <th>Nume</th>
             <th>Prenume</th>
             <th>Actiuni</th>
@@ -39,7 +39,7 @@
             <td ng-if="!filters.sc">{{student.sc_nume}}</td>
             <td ng-if="!filters.ser">{{student.ser_nume}}</td>
             <td ng-if="!filters.gr">{{student.gr_nr}}</td>
-            <td ng-if="!filters.sem">{{student.sem_nr}}</td>
+            <td ng-if="!filters.sgr">{{student.sem_nr}}</td>
             <td>{{student.nume}}</td>
             <td>{{student.prenume}}</td>
             <td class="act">
