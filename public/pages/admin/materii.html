@@ -3,10 +3,12 @@
     <table class="standard">
         <tr>
             <th>Nume</th>
+            <th>Abreviere</th>
             <th>Actiuni</th>
         </tr>
         <tr ng-repeat="materie in materii">
             <td>{{materie.nume}}</td>
+            <td>{{materie.abreviere}}</td>
             <td class="act">
                 <a href ng-click="delete(materie.id)">
                     <i class="fa fa-times-circle"></i>

@@ -10,12 +10,16 @@
             <option value="">Sectie...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume+ ' An ' + ser.an for ser in serii" ng-disabled="!filters.sc">
+        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
             <option value="">Serie...</option>
         </select>
 
         <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nr_grupa for gr in grupe" ng-disabled="!filters.ser">
             <option value="">Grupa...</option>
+        </select>
+        <i class="fa fa-bars"></i>
+        <select class="form-control" ng-model="filters.an" ng-options="an.nr as an.nume for an in ani">
+            <option value="">An...</option>
         </select>
     </form>
 
@@ -23,6 +27,7 @@
         <tr>
             <th ng-if="!filters.f">Facultate</th>
             <th ng-if="!filters.sc">Sectie</th>
+            <th ng-if="!filters.an">An</th>
             <th ng-if="!filters.ser">Serie</th>
             <th ng-if="!filters.gr">Grupa</th>
             <th>Semigrupa</th>
@@ -32,6 +37,7 @@
         <tr ng-repeat="semigrupe in semigrupe">
             <td ng-if="!filters.f">{{semigrupe.fac_nume}}</td>
             <td ng-if="!filters.sc">{{semigrupe.sc_nume}}</td>
+            <td ng-if="!filters.an">{{semigrupe.an_nume}}</td>
             <td ng-if="!filters.ser">{{semigrupe.ser_nume}}</td>
             <td ng-if="!filters.gr">{{semigrupe.gr_nr}}</td>
             <td>{{semigrupe.nr_semigrupa}}</td>

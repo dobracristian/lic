@@ -48,8 +48,8 @@
             <td ng-if="!filters.ser">{{laborator.ser_nume}}</td>
             <td ng-if="!filters.gr">{{laborator.nr_gr}}</td>
             <td ng-if="!filters.sgr">{{laborator.nr_sem}}</td>
-            <td ng-if="!filters.curs">{{laborator.curs_nume}}</td>
-            <td>{{laborator.nume}}</td>
+            <td ng-if="!filters.curs">{{laborator.curs_nume}} ({{laborator.mat_abr}})</td>
+            <td>{{laborator.nume}} ({{laborator.mat_abr}})</td>
             <td ng-if="!filters.prof">{{laborator.prof_nume}}
                 {{laborator.prof_pren}}
             </td>

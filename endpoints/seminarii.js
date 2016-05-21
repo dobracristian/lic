@@ -2,10 +2,11 @@ module.exports = function(server, getConnection){
 
     function getSeminar(body) {
         return  {
-            nume:     body.nume,
-            id_curs:  body.id_curs,
-            id_grupa: body.id_grupa,
-            id_prof:  body.id_prof
+            nume:       body.nume,
+            id_curs:    body.id_curs,
+            id_grupa:   body.id_grupa,
+            id_prof:    body.id_prof,
+            id_materie: body.id_materie
         };
     }
 
@@ -15,9 +16,10 @@ module.exports = function(server, getConnection){
         var conn = getConnection();
         var query = 'SELECT seminarii.*,cursuri.nume as curs_nume, profesori.nume as prof_nume,' +
             ' profesori.prenume as prof_pren, grupe.nr_grupa as nr_gr, serii.nume as ser_nume, ' +
-            ' sectii.nume as sc_nume, facultati.nume as fac_nume' +
+            ' sectii.nume as sc_nume, facultati.nume as fac_nume, materii.abreviere as mat_abr' +
             ' from seminarii' +
             ' Inner join cursuri on seminarii.id_curs=cursuri.id' +
+            ' Inner join materii on cursuri.id_materie=materii.id' +
             ' Inner join grupe on seminarii.id_grupa=grupe.id' +
             ' Inner join profesori on seminarii.id_prof=profesori.id' +
             ' Inner join serii on grupe.id_serie=serii.id' +

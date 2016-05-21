@@ -10,7 +10,7 @@
             <option value="">Sectie...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume+ ' An ' + ser.an for ser in serii" ng-disabled="!filters.sc">
+        <select class="form-control" ng-model="filters.ser" ng-options="ser.id as ser.nume for ser in serii" ng-disabled="!filters.sc">
             <option value="">Serie...</option>
         </select>
 
@@ -21,12 +21,18 @@
         <select class="form-control" ng-model="filters.sgr" ng-options="sgr.id as sgr.nr_semigrupa for sgr in semigrupe" ng-disabled="!filters.gr">
             <option value="">Semigrupe...</option>
         </select>
+        <i class="fa fa-bars"></i>
+        <select class="form-control" ng-model="filters.an" ng-options="an.nr as an.nume for an in ani">
+            <option value="">An...</option>
+        </select>
+        Cauta student:<input type="text" class="form-control" ng-model="globalSearch.nume">
     </form>
 
     <table class="standard">
         <tr>
             <th ng-if="!filters.f">Facultate</th>
             <th ng-if="!filters.sc">Sectie</th>
+            <th ng-if="!filters.an">An</th>
             <th ng-if="!filters.ser">Serie</th>
             <th ng-if="!filters.gr">Grupa</th>
             <th ng-if="!filters.sgr">Semigrupa</th>
@@ -34,9 +40,10 @@
             <th>Prenume</th>
             <th>Actiuni</th>
         </tr>
-        <tr ng-repeat="student in studenti">
+        <tr ng-repeat="student in studenti | filter:globalSearch">
             <td ng-if="!filters.f">{{student.fac_nume}}</td>
             <td ng-if="!filters.sc">{{student.sc_nume}}</td>
+            <td ng-if="!filters.an">{{student.an_nume}}</td>
             <td ng-if="!filters.ser">{{student.ser_nume}}</td>
             <td ng-if="!filters.gr">{{student.gr_nr}}</td>
             <td ng-if="!filters.sgr">{{student.sem_nr}}</td>

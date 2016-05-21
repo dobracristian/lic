@@ -1,17 +1,25 @@
-angular.module('app').controller('SemigrupeController', function($scope, Restangular, $stateParams, $uibModal){
+angular.module('app').controller('SemigrupeController', function($scope, Restangular, $stateParams, $uibModal, L){
     console.log('Salut!', $stateParams.gr);
     $scope.filters = {
-        gr: Number($stateParams.gr) || null,
+        gr:  Number($stateParams.gr) || null,
         ser: Number($stateParams.ser) || null,
-        sc: Number($stateParams.sc) || null,
-        f: Number($stateParams.f) || null
+        an:  Number($stateParams.an) || null,
+        sc:  Number($stateParams.sc) || null,
+        f:   Number($stateParams.f) || null
     };
+
+    L.ani($scope, 'ani');
 
     Restangular.all('api/facultati').getList().then(function (response) {
         $scope.facultati = response.plain();
     });
 
     $scope.$watch('filters.gr', loadSemigrupe);
+    $scope.$watch('filters.an', function() {
+        loadSerii();
+        loadGrupe();
+        loadSemigrupe();
+    });
     $scope.$watch('filters.ser', function() {
         if(!$scope.filters.ser) {
             $scope.filters.gr = null;
@@ -21,6 +29,7 @@ angular.module('app').controller('SemigrupeController', function($scope, Restang
         }
         loadSemigrupe();
     });
+
     $scope.$watch('filters.sc', function() {
         if(!$scope.filters.sc) {
             $scope.filters.ser = null;
@@ -42,10 +51,11 @@ angular.module('app').controller('SemigrupeController', function($scope, Restang
 
     function loadSemigrupe() {
         Restangular.all('api/semigrupe').getList({
-            gr: $scope.filters.gr,
+            gr:  $scope.filters.gr,
             ser: $scope.filters.ser,
-            sc: $scope.filters.sc,
-            f: $scope.filters.f
+            an:  $scope.filters.an,
+            sc:  $scope.filters.sc,
+            f:   $scope.filters.f
         }).then(function(response) {
             $scope.semigrupe = response.plain();
         });
@@ -61,7 +71,8 @@ angular.module('app').controller('SemigrupeController', function($scope, Restang
 
     function loadSerii() {
         Restangular.all('api/serii').getList({
-            sc: $scope.filters.sc
+            an: $scope.filters.an,
+            sc: $scope.filters.an
         }).then(function (response) {
             $scope.serii = response.plain();
         });

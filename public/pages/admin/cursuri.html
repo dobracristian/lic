@@ -14,7 +14,7 @@
             <option value="">Serie...</option>
         </select>
         <i class="fa fa-bars"></i>
-        <select class="form-control" ng-model="filters.mat" ng-options="mat.id as mat.nume for mat in materii">
+        <select class="form-control" ng-model="filters.mat" ng-options="mat.id as mat.nume+ '  (' + mat.abreviere+ ') ' for mat in materii">
             <option value="">Materie...</option>
         </select>
         <i class="fa fa-bars"></i>
@@ -37,10 +37,11 @@
             <td ng-if="!filters.f">{{curs.fac_nume}}</td>
             <td ng-if="!filters.sc">{{curs.sc_nume}}</td>
             <td ng-if="!filters.ser">{{curs.ser_nume}}</td>
-            <td ng-if="!filters.mat">{{curs.mat_nume}}</td>
-            <td>{{curs.nume}}</td>
-            <td ng-if="!filters.prof">{{curs.prof_nume}}
-                {{curs.prof_pren}}
+            <td ng-if="!filters.mat">{{curs.mat_nume}}
+                ({{curs.mat_abr}})</td>
+            <td>{{curs.nume}}
+                ({{curs.mat_abr}})</td>
+            <td ng-if="!filters.prof">{{curs.prof_nume}}{{curs.prof_pren}}
             </td>
             <td class="act">
                 <a href ng-click="delete(curs.id)">

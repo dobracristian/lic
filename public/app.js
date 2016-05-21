@@ -8,6 +8,20 @@ angular.module('app', ['ui.router', 'restangular', 'ui.bootstrap']).config(funct
     });
 
     $stateProvider.state({
+        name: 'admin.ani',
+        url: '/ani',
+        templateUrl: 'pages/admin/ani.html',
+        controller: 'AniController'
+    });
+
+    $stateProvider.state({
+        name: 'admin.orar',
+        url: '/orar',
+        templateUrl: 'pages/admin/orar.html',
+        controller: 'OrarController'
+    });
+
+    $stateProvider.state({
         name: 'admin.facultati',
         url: '/facultati',
         templateUrl: 'pages/admin/facultati.html',

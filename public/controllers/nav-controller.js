@@ -1,5 +1,8 @@
 angular.module('app').controller('NavController', function($scope){
     $scope.items = [{
+        label: 'Ani',
+        state:'admin.ani'
+    }, {
         label: 'Facultati',
         state: 'admin.facultati'
     }, {
@@ -32,5 +35,8 @@ angular.module('app').controller('NavController', function($scope){
     }, {
         label: 'Seminarii',
         state: 'admin.seminarii'
+    }, {
+        label: 'Orar',
+        state: 'admin.orar'
     }];
 });

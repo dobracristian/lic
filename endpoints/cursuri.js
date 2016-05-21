@@ -13,9 +13,9 @@ module.exports = function(server, getConnection){
     server.get('/api/cursuri', function(req, res) {
 
         var conn = getConnection();
-        var query = 'SELECT cursuri.*, materii.nume as mat_nume, profesori.nume as prof_nume,' +
-            ' profesori.prenume as prof_pren, sectii.nume as sc_nume, serii.nume as ser_nume,' +
-            ' facultati.nume as fac_nume' +
+        var query = 'SELECT cursuri.*, materii.nume as mat_nume, materii.abreviere as mat_abr, ' +
+            ' profesori.nume as prof_nume, facultati.nume as fac_nume, ' +
+            ' profesori.prenume as prof_pren, sectii.nume as sc_nume, serii.nume as ser_nume' +
             ' from cursuri' +
             ' Inner join materii on cursuri.id_materie=materii.id' +
             ' Inner join serii on cursuri.id_serie=serii.id' +

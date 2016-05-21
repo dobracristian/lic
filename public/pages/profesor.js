@@ -1,8 +1,11 @@
-angular.module('app').controller('ProfesorController', function ($scope, Restangular, $uibModal) {
+angular.module('app').controller('ProfesorController', function ($scope, Restangular, $uibModal, L) {
     console.log('Salut');
     loadCursuri();
     loadLaboratoare();
     loadSeminarii();
+
+
+    L.orarev($scope, 'orarZiOra');
 
     function loadCursuri() {
         Restangular.all('/api/profesor/cursuri').getList().then(function(response) {

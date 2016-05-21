@@ -1,16 +1,23 @@
-angular.module('app').controller('GrupeController', function($scope, Restangular, $stateParams, $uibModal){
+angular.module('app').controller('GrupeController', function($scope, Restangular, $stateParams, $uibModal, L){
     console.log('Salut!', $stateParams.ser);
     $scope.filters = {
         ser: Number($stateParams.ser) || null,
+        an:  Number($stateParams.an) || null,
         sc:  Number($stateParams.sc) || null,
         f:   Number($stateParams.f) || null
     };
+
+    L.ani($scope, 'ani');
 
     Restangular.all('api/facultati').getList().then(function (response) {
         $scope.facultati = response.plain();
     });
 
     $scope.$watch('filters.ser', loadGrupe);
+    $scope.$watch('filters.an', function() {
+        loadSerii();
+        loadGrupe();
+    });
     $scope.$watch('filters.sc', function() {
         if(!$scope.filters.sc) {
             $scope.filters.ser = null;
@@ -33,6 +40,7 @@ angular.module('app').controller('GrupeController', function($scope, Restangular
     function loadGrupe() {
         Restangular.all('api/grupe').getList({
             ser: $scope.filters.ser,
+            an:  $scope.filters.an,
             sc:  $scope.filters.sc,
             f:   $scope.filters.f
         }).then(function(response) {
@@ -42,6 +50,7 @@ angular.module('app').controller('GrupeController', function($scope, Restangular
 
     function loadSerii() {
         Restangular.all('api/serii').getList({
+            an: $scope.filters.an,
             sc: $scope.filters.sc
         }).then(function (response) {
             $scope.serii = response.plain();
@@ -87,6 +96,7 @@ angular.module('app').controller('GrupeController', function($scope, Restangular
         modalScope.grupa = {
             id_sectie:    $scope.filters.sc,
             id_facultate: $scope.filters.f,
+            an:           $scope.filters.an,
             id_serie:     $scope.filters.ser
         };
 

@@ -5,7 +5,9 @@
     </div>
     <div class="form-group">
         <label>An:</label>
-        <input type="text" class="form-control" ng-model="serie.an" >
+        <select class="form-control" ng-model="serie.an" ng-options="an.nr as an.nume for an in ani">
+            <option value="">Alege an</option>
+        </select>
     </div>
 
 </form>

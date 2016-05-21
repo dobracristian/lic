@@ -13,12 +13,18 @@ module.exports = function(server, getConnection){
 
         var conn = getConnection();
 
-        var query = 'SELECT serii.*, sectii.nume as sc_nume, facultati.nume as fac_nume, facultati.id as fac_id'+
+        var query = 'SELECT serii.*, sectii.nume as sc_nume, facultati.nume as fac_nume, facultati.id as fac_id, ' +
+                ' ani.nume as an_nume, ani.nr as an_nr'+
                 ' from serii'+
-                ' Inner join sectii on serii.id_sectie=sectii.id'+
+                ' Inner join sectii on serii.id_sectie=sectii.id' +
+                ' Inner join ani on serii.an=ani.nr'+
                 ' Inner join facultati on sectii.id_facultate=facultati.id';
         var conditions = [];
         var params = [];
+        if(req.params.an) {
+            conditions.push('serii.an=?');
+            params.push(req.params.an);
+        }
         if(req.params.sc) {
             conditions.push('sectii.id=?');
             params.push(req.params.sc);

@@ -6,9 +6,9 @@
         <th>Laboratoare</th>
     </tr>
     <tr ng-repeat="curs in cursuri">
-        <td><a ui-sref="curs({id: curs.curs_id})">{{curs.curs_nume}}</a></td>
-        <td><a ui-sref="seminar({id: curs.sem_id})">{{curs.sem_nume}}</a></td>
-        <td><a ui-sref="laborator({id: curs.lab_id})">{{curs.lab_nume}}</a></td>
+        <td><a ui-sref="curs({id: curs.curs_id})">{{curs.curs_nume}} ({{curs.mat_abr}})</a></td>
+        <td><a ui-sref="seminar({id: curs.sem_id})">{{curs.sem_nume}} ({{curs.mat_abr}})</a></td>
+        <td><a ui-sref="laborator({id: curs.lab_id})">{{curs.lab_nume}} ({{curs.mat_abr}})</a></td>
     </tr>
 </table>
 

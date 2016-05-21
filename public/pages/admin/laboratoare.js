@@ -8,7 +8,7 @@ angular.module('app').controller('LaboratoareController', function($scope, Resta
         sc: Number($stateParams.sc) || null,
         f: Number($stateParams.f) || null,
         curs: Number($stateParams.curs) ||null,
-        prof: Number($stateParams.curs) || null
+        prof: Number($stateParams.prof) || null
     };
     loadCursuri();
     loadProfesori();

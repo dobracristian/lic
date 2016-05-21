@@ -5,7 +5,10 @@ angular.module('app').controller('AdminStudentController', function($scope, Rest
         L.sectii($scope, 'sectii', f);
     });
     $scope.$watch('student.sc_id', function(sc) {
-        L.serii($scope, 'serii', sc);
+        L.an($scope, 'an', sc);
+    });
+    $scope.$watch('student.ser_an', function(an) {
+        L.serii($scope, 'serii', an);
     });
     $scope.$watch('student.ser_id', function(ser) {
         L.grupe($scope, 'grupe', ser);

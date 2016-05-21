@@ -1,0 +1,49 @@
+<form>
+    <div class="form-group">
+        <label>Saptamani:</label>
+        <select class="form-control" ng-model="ora.saptamana" ng-options="sapt.id as sapt.nume for sapt in saptamani">
+            <option value="">Saptamani...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Zi:</label>
+        <select class="form-control" ng-model="ora.zi" ng-options="zi.id as zi.nume for zi in zile">
+            <option value="">Zile...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Ora Start:</label>
+        <input type="number" class="form-control" ng-model="ora.ora_start">
+    </div>
+    <div class="form-group">
+        <label>Ora Sfarsit:</label>
+        <input type="number" class="form-control" ng-model="ora.ora_sf">
+    </div>
+    <div class="form-group">
+        <label>Sala:</label>
+        <input type="text" class="form-control" ng-model="ora.sala">
+    </div>
+    <div class="form-group" ng-if="!(ora.id_sem || ora.id_lab)">
+        <label>Curs:</label>
+        <select class="form-control" ng-model="ora.id_curs" ng-options="curs.id as curs.nume for curs in cursuri">
+            <option value="">Curs...</option>
+        </select>
+    </div>
+    <div class="form-group" ng-if="!(ora.id_curs || ora.id_lab)">
+        <label>Seminar:</label>
+        <select class="form-control" ng-model="ora.id_sem" ng-options="sem.id as sem.nume for sem in seminarii">
+            <option value="">Seminar...</option>
+        </select>
+    </div>
+    <div class="form-group" ng-if="!(ora.id_sem || ora.id_curs)">
+        <label>Laborator:</label>
+        <select class="form-control" ng-model="ora.id_lab" ng-options="lab.id as lab.nume for lab in laboratoare">
+            <option value="">Laborator...</option>
+        </select>
+    </div>
+</form>
+
+<button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+<button class="btn btn-primary" ng-click="add()" ng-show="!ora.id">Adauga</button>
+<button class="btn btn-primary" ng-click="save()" ng-show="ora.id">Salveaza</button>
+<br><pre>{{ora|json:4}}</pre>

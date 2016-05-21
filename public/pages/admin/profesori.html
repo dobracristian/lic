@@ -1,5 +1,8 @@
 <div id="page-wrap">
     <button class="btn btn-primary pull-right" ng-click="add()">Adauga profesor</button>
+    <form class="form-inline">
+        Cauta profesor:<input class="form-control" type="text" ng-model="globalSearch.nume">
+    </form>
     <table class="standard">
         <tr>
             <th>Nume</th>
@@ -9,7 +12,7 @@
             <th>Seminarii</th>
             <th>Actiuni</th>
         </tr>
-        <tr ng-repeat="profesor in profesori">
+        <tr ng-repeat="profesor in profesori | filter:globalSearch">
             <td>{{profesor.nume}}</td>
             <td>{{profesor.prenume}}</td>
             <td><a ui-sref="^.cursuri({prof: profesor.id})">Vezi cursuri</a></td>

@@ -12,11 +12,12 @@ module.exports = function(server, getConnection){
 
         var conn = getConnection();
 
-        var query = 'SELECT grupe.*, serii.nume as ser_nume, sectii.nume as sc_nume, facultati.nume as fac_nume,' +
-                ' facultati.id as fac_id, sectii.id as id_sectie' +
+        var query = 'SELECT grupe.*, serii.nume as ser_nume, serii.an as ser_an, sectii.nume as sc_nume, facultati.nume as fac_nume,' +
+                ' facultati.id as fac_id, sectii.id as id_sectie, ani.nume as an_nume' +
                 ' from grupe' +
-                ' Inner join serii on grupe.id_serie=serii.id'+
+                ' Inner join serii on grupe.id_serie=serii.id' +
                 ' Inner join sectii on serii.id_sectie=sectii.id'+
+                ' Inner join ani on serii.an=ani.nr'+
                 ' Inner join facultati on sectii.id_facultate=facultati.id';
         var conditions = [];
         var params = [];
@@ -32,6 +33,12 @@ module.exports = function(server, getConnection){
             conditions.push('facultati.id=?');
             params.push(req.params.f);
         }
+
+        if(req.params.an) {
+            conditions.push('serii.an=?');
+            params.push(req.params.an);
+        }
+
         if(conditions.length) {
             query += ' where '+ conditions.join(' and ');
         }

@@ -2,7 +2,8 @@ module.exports = function(server, getConnection){
 
     function getMaterie(body) {
         return  {
-            nume: body.nume
+            nume:      body.nume,
+            abreviere: body.abreviere
         };
     }
 

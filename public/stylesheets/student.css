@@ -8,17 +8,46 @@ table.calendar > thead > tr > th {
 
 table.calendar > tbody > tr > td {
     height: 20px;
+    position: relative;
+}
+table.calendar > tbody > tr > td.ora {
+    padding: 0;
 }
 
 table.calendar > tbody > tr > td > div {
-//padding: 8px;
-    height: 40px;
     overflow: hidden;
-    display: inline-block;
+    display: table-cell;
     vertical-align: middle;
-    float: left;
+    position: absolute;
+    border: 1px dashed gray;
+    width: 100%;
+    text-align: center;
+    background-color: #dde;
 }
 
-table.calendar > tbody > tr >td.event {
-    background-color: #761c19;
+div.paritate1 {
+    position: absolute;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    border-top: 1px solid red;
+    transform: rotate(-45deg);
 }
+div.paritate2 {
+    position: absolute;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    border-top: 3px double red;
+    transform: rotate(-45deg);
+}
+div.paritate3 {
+    position: absolute;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    border-top: 1px solid black;
+    transform: rotate(-45deg) translate(-50%, -80%);
+    background-color: black;
+}
+

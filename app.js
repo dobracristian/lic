@@ -33,6 +33,8 @@ function getConnection() {
 }
 
 require('./endpoints/studenti.js')(server, getConnection);
+require('./endpoints/ani.js')(server, getConnection);
+require('./endpoints/orar.js')(server, getConnection);
 require('./endpoints/facultati.js')(server, getConnection);
 require('./endpoints/sectii.js')(server, getConnection);
 require('./endpoints/serii.js')(server, getConnection);

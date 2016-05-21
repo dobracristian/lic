@@ -9,7 +9,7 @@
         <th>Cursuri</th>
     </tr>
     <tr ng-repeat="curs in cursuri">
-        <td><a ui-sref="curs({id: curs.id})">{{curs.nume}}</a></td>
+        <td><a ui-sref="curs({id: curs.id})">{{curs.nume}} ({{curs.mat_abr}})</a></td>
     </tr>
 </table>
 
@@ -18,7 +18,7 @@
         <th>Laboratoare</th>
     </tr>
     <tr ng-repeat="lab in laboratoare">
-        <td><a ui-sref="laborator({id: lab.id})">{{lab.nume}}</a></td>
+        <td><a ui-sref="laborator({id: lab.id})">{{lab.nume}} ({{lab.mat_abr}})</a></td>
     </tr>
 </table>
 
@@ -27,15 +27,15 @@
         <th>Seminarii</th>
     </tr>
     <tr ng-repeat="sem in seminarii">
-        <td><a ui-sref="seminar({id: sem.id})">{{sem.nume}}</a></td>
+        <td><a ui-sref="seminar({id: sem.id})">{{sem.nume}} ({{sem.mat_abr}})</a></td>
     </tr>
 </table>
 
-
+<!--<pre>{{orarZiOra|json:4}}</pre>-->
 <table class="calendar table table-bordered">
     <thead>
     <tr>
-        <th></th>
+        <th>Ora</th>
         <th width="20%">Luni</th>
         <th width="20%">Marti</th>
         <th width="20%">Miercuri</th>
@@ -44,60 +44,27 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>08:00</td>
-        <td ng-dblclick="openFilePopup()"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+    <tr ng-repeat="ora in [8,9,10,11,12,13,14,15,16,17,18,19,20]">
+        <td>{{ora}}</td>
+        <td class="ora" ng-repeat="zi in [1,2,3,4,5]">
+            <div ng-repeat="ozo in orarZiOra[zi+'-'+ora]" title="{{ozo.prof_nume}} - sala {{ozo.sala}}"
+                 style="
+                border-left-style: {{ozo.saptamana === 1 ? 'solid' : ozo.saptamana === 2 ? 'double' : 'dotted'}};
+                top: -1px;
+                height: calc({{ozo.durata}}00% + {{ozo.durata+1}}px);
+                width: calc({{100/orarZiOra[zi+'-'+ora].length}}% + 1px);
+                left: calc({{$index*100/orarZiOra[zi+'-'+ora].length}}% - 1px)"
+            >
 
-    <tr ng-repeat="curs in cursuri">
-        <td>10:00</td>
-        <td class="event" ng-dblclick="openFilePopup()">
-            <a class="title" ui-sref="curs({id: curs.id})">{{curs.nume}}</a>
+                <div class="paritate{{ozo.saptamana}}"></div>
+                <a ng-if="ozo.id_curs" ui-sref="curs({id: ozo.id_curs})">curs <b>{{ozo.abr}}</b></a>
+                <a ng-if="ozo.id_sem" ui-sref="seminar({id: ozo.id_sem})"><i>sem</i> {{ozo.abr}}</a>
+                <a ng-if="ozo.id_lab" ui-sref="laborator({id: ozo.id_lab})"><i>lab</i> {{ozo.abr}}</a>
+                <small>{{ozo.prof_nume}}</small>
+
+                <div>sala: {{ozo.sala}}</div>
+            </div>
         </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr>
-        <td>12:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr>
-        <td>14:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr>
-        <td>16:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr>
-        <td>18:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
     </tr>
 
     </tbody>

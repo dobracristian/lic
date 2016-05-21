@@ -14,14 +14,15 @@ module.exports = function(server, getConnection) {
         var conn = getConnection();
 
         var query = 'SELECT studenti.*, semigrupe.nr_semigrupa as sem_nr, grupe.nr_grupa as gr_nr,' +
-            ' grupe.id as gr_id, serii.id as ser_id,' +
+            ' grupe.id as gr_id, serii.id as ser_id, serii.an as ser_an, ' +
             ' serii.nume as ser_nume, sectii.nume as sc_nume, sectii.id as sc_id,' +
-            ' facultati.nume as fac_nume, facultati.id as fac_id' +
+            ' facultati.nume as fac_nume, facultati.id as fac_id, ani.nume as an_nume ' +
             ' from studenti' +
             ' Inner join semigrupe on studenti.id_semigrupa=semigrupe.id' +
             ' Inner join grupe on semigrupe.id_grupa=grupe.id' +
             ' Inner join serii on grupe.id_serie=serii.id' +
             ' Inner join sectii on serii.id_sectie=sectii.id' +
+            ' Inner join ani on serii.an=ani.nr' +
             ' Inner join facultati on sectii.id_facultate=facultati.id';
         var conditions = [];
         var params = [];
@@ -45,6 +46,12 @@ module.exports = function(server, getConnection) {
             conditions.push('facultati.id=?');
             params.push(req.params.f);
         }
+
+        if(req.params.an) {
+            conditions.push('serii.an=?');
+            params.push(req.params.an);
+        }
+
         if(conditions.length){
             query += ' where '+ conditions.join(' and ');
         }
