@@ -1,5 +1,3 @@
-<h1>{{curs.nume}}</h1>
-
 <div id="page-wrap">
     <h3>Suport curs</h3>
     <table class="table table-striped">
@@ -8,12 +6,12 @@
                 <a target="_blank" href="{{fisier.url}}">{{fisier.nume}}</a>
             </td>
             <td class="act col-md-3 col-md-offset-3">
-            <button type="button" class="btn btn-danger" ng-click="delete(fisier.id)">Sterge</button>
-            <button type="button" class="btn btn-primary" ng-click="edit(fisier)">Editare</button>
+            <button type="button" class="btn btn-danger" ng-show="USER.tip==='prof'" ng-click="delete(fisier.id)">Sterge</button>
+            <button type="button" class="btn btn-primary" ng-show="USER.tip==='prof'" ng-click="edit(fisier)">Editare</button>
             </td>
         </tr>
     </table>
-    <button class="btn btn-primary" ng-click="openFilePopup('suport')" ng-show="1 || USER.role==='profesor'">Adauga fisier</button>
+    <button class="btn btn-primary" ng-click="openFilePopup('suport')" ng-show="USER.tip==='prof'">Adauga fisier</button>
 
     <h3>Note</h3>
     <table class="table table-striped">
@@ -22,12 +20,12 @@
                 <a target="_blank" href="{{fisier.url}}">{{fisier.nume}}</a>
             </td>
             <td class="act col-md-3 col-md-offset-3">
-            <button type="button" class="btn btn-danger" ng-click="delete(fisier.id)">Sterge</button>
-            <button type="button" class="btn btn-primary" ng-click="edit(fisier)">Editare</button>
+            <button type="button" class="btn btn-danger" ng-show="USER.tip==='prof'" ng-click="delete(fisier.id)">Sterge</button>
+            <button type="button" class="btn btn-primary" ng-show="USER.tip==='prof'" ng-click="edit(fisier)">Editare</button>
             </td>
         </tr>
     </table>
-    <button class="btn btn-primary" ng-click="openFilePopup('note')" ng-show="1 || USER.role==='profesor'">Adauga fisier</button>
+    <button class="btn btn-primary" ng-click="openFilePopup('note')" ng-show="USER.tip==='prof'">Adauga fisier</button>
 </div>
 
 

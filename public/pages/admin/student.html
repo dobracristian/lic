@@ -19,6 +19,12 @@
         </select>
     </div>
     <div class="form-group" ng-if="student.id">
+        <label>An:</label>
+        <select class="form-control" ng-model="student.ser_an" ng-options="an.nr as an.nume for an in ani">
+            <option value="">Alege an</option>
+        </select>
+    </div>
+    <div class="form-group" ng-if="student.id">
         <label>Serie:</label>
         <select class="form-control" ng-model="student.ser_id" ng-options="ser.id as ser.nume for ser in serii">
             <option value="">Alege seria</option>
@@ -26,15 +32,19 @@
     </div>
     <div class="form-group" ng-if="student.id">
         <label>Grupa:</label>
-        <select class="form-control" ng-model="student.gr_id" ng-options="gr.id as gr.nr_grupa for gr in grupe">
+        <select class="form-control" ng-model="student.gr_id" ng-options="gr.id as gr.nume for gr in grupe">
             <option value="">Alege grupa</option>
         </select>
     </div>
     <div class="form-group" ng-if="student.id">
         <label>Semigrupa:</label>
-        <select class="form-control" ng-model="student.id_semigrupa" ng-options="sgr.id as sgr.nr_semigrupa for sgr in semigrupe">
+        <select class="form-control" ng-model="student.id_semigrupa" ng-options="sgr.id as sgr.nume for sgr in semigrupe">
             <option value="">Alege semigrupa</option>
         </select>
+    </div>
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" ng-model="student.email">
     </div>
 
 </form>

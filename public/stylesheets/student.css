@@ -28,16 +28,16 @@ table.calendar > tbody > tr > td > div {
 div.paritate1 {
     position: absolute;
     left: 0;
-    height: 30px;
-    width: 30px;
+    height: 80px;
+    width: 80px;
     border-top: 1px solid red;
     transform: rotate(-45deg);
 }
 div.paritate2 {
     position: absolute;
     left: 0;
-    height: 30px;
-    width: 30px;
+    height: 80px;
+    width: 80px;
     border-top: 3px double red;
     transform: rotate(-45deg);
 }

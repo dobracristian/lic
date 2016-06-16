@@ -15,7 +15,7 @@
             <option value="">Serie...</option>
         </select>
         <i class="fa fa-arrow-right"></i>
-        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nr_grupa for gr in grupe" ng-disabled="!filters.ser">
+        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nume for gr in grupe" ng-disabled="!filters.ser">
             <option value="">Grupe...</option>
         </select>
         <i class="fa fa-bars"></i>
@@ -42,7 +42,7 @@
             <td ng-if="!filters.f">{{seminar.fac_nume}}</td>
             <td ng-if="!filters.sc">{{seminar.sc_nume}}</td>
             <td ng-if="!filters.ser">{{seminar.ser_nume}}</td>
-            <td ng-if="!filters.gr">{{seminar.nr_gr}}</td>
+            <td ng-if="!filters.gr">{{seminar.gr_nume}}</td>
             <td  ng-if="!filters.curs">{{seminar.curs_nume}} ({{seminar.mat_abr}})</td>
             <td>{{seminar.nume}} ({{seminar.mat_abr}})</td>
             <td ng-if="!filters.prof">{{seminar.prof_nume}}

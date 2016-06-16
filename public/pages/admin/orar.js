@@ -32,8 +32,6 @@ angular.module('app').controller('OrarController', function($scope, L, Restangul
         id: 5,
         nume: 'Vineri'
     }];
-    $scope.ore = [{ora: 8},{ora: 9},{ora: 10},{ora: 11},{ora: 12},{ora: 13},{ora: 14},{ora: 15},{ora: 16},{ora: 17},
-        {ora: 18},{ora: 19},{ora: 20}]
 
     function loadOrar() {
         L.orar($scope, 'orar', $scope.filters.sapt);

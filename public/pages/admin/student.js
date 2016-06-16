@@ -1,18 +1,19 @@
 angular.module('app').controller('AdminStudentController', function($scope, Restangular, L) {
 
+    //L.ani($scope, 'ani');
     L.facultati($scope, 'facultati');
     $scope.$watch('student.fac_id', function(f) {
         L.sectii($scope, 'sectii', f);
     });
     $scope.$watch('student.sc_id', function(sc) {
-        L.an($scope, 'an', sc);
-    });
-    $scope.$watch('student.ser_an', function(an) {
-        L.serii($scope, 'serii', an);
+        L.serii($scope, 'serii', sc);
     });
     $scope.$watch('student.ser_id', function(ser) {
         L.grupe($scope, 'grupe', ser);
     });
+    //$scope.$watch('student.sc_id', function(an) {
+    //    L.ani($scope, 'ani', an);
+    //});
     $scope.$watch('student.gr_id', function(gr) {
         L.semigrupe($scope, 'semigrupe', gr);
     });

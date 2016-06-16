@@ -2,7 +2,7 @@ module.exports = function(server, getConnection){
 
     function getSemigr(body) {
         return  {
-            nr_semigrupa: body.nr_semigrupa,
+            nume: body.nume,
             id_grupa:     body.id_grupa
         };
     }
@@ -12,7 +12,7 @@ module.exports = function(server, getConnection){
 
         var conn = getConnection();
 
-        var query ='SELECT semigrupe.*, grupe.nr_grupa as gr_nr, serii.nume as ser_nume, serii.an as ser_an, ' +
+        var query ='SELECT semigrupe.*, grupe.nume as gr_nr, serii.nume as ser_nume, serii.an as ser_an, ' +
             ' sectii.nume as sc_nume, facultati.nume as fac_nume, facultati.id as fac_id,' +
             ' sectii.id as id_sectie, serii.id as id_serie, ani.nume as an_nume' +
             ' from semigrupe' +
@@ -48,7 +48,7 @@ module.exports = function(server, getConnection){
         if(conditions.length) {
             query += ' where '+ conditions.join(' and ');
         }
-        query += ' order by semigrupe.nr_semigrupa';
+        query += ' order by semigrupe.nume';
 
         conn.query(query, params, function(err, rows){
 

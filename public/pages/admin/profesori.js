@@ -46,4 +46,26 @@ angular.module('app').controller('ProfesoriController', function($scope, Restang
         }).result.then(loadProfesori);
     };
 
+    $scope.openChangePassword = function(profesor) {
+
+        var modalScope = $scope.$new();
+        modalScope.info = {
+            email: profesor.email,
+            parola: ''
+        };
+
+        modalScope.changePassword = function() {
+            console.log('C', modalScope.info.parola, profesor.id);
+            Restangular.one('api/profesori', profesor.id).all('parola').post(modalScope.info).then(function(){
+                console.log('Salvare incheiata');
+                modalScope.$$childHead.$close();
+            });
+
+        };
+        $uibModal.open({
+            templateUrl: 'pages/admin/profesor-parola.html',
+            scope: modalScope
+        });
+    };
+
 });

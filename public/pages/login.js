@@ -1,22 +1,29 @@
-angular.module('app').controller('LoginController', function($scope, $state, $rootScope) {
+angular.module('app').controller('LoginController', function($scope, $state, $rootScope, $http) {
 
-    $scope.login = function(username) {
-        if(username === 'admin') {
-            window.role = 'admin';
-            $state.go('admin.facultati');
-        }
-        else if(username === 'student') {
-            window.role = 'student';
-            $state.go('student');
-        }
-        else if(username === 'profesor') {
-            window.role = 'profesor';
-            $state.go('profesor');
-        }
+    $scope.login = function(user) {
 
-        $rootScope.USER = {
-            role:     window.role,
-            username: username
-        }
+        $http.post('/api/login',{username: $scope.username, parola: $scope.parola}).then(function (response) {
+            if(response.data) {
+                var user = response.data;
+                $rootScope.USER = user;
+
+                switch (user.tip) {
+                    case 'admin':
+                        $state.go('admin.facultati');
+                        break;
+                    case 'prof':
+                        $state.go('profesor');
+                        break;
+                    case 'stud':
+                        $state.go('student');
+                        break;
+                }
+            } else {
+                $scope.badLogin = true;
+            }
+
+        });
+
+
     }
 });

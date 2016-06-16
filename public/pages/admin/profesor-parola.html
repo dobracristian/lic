@@ -1,0 +1,14 @@
+<div class="form-group">
+    <label>Username</label>
+    <input type="text" class="form-control" ng-model="info.email">
+</div>
+<div class="form-group">
+    <label>Parola noua</label>
+    <input type="text" class="form-control" ng-model="info.parola">
+</div>
+
+<div>
+    <button class="btn btn-default" ng-click="$dismiss()">Inapoi</button>
+    <button class="btn btn-primary" ng-click="changePassword()">Schimba</button>
+</div>
+<pre>{{info.parola}}</pre>

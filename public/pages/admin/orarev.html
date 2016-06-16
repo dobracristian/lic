@@ -25,19 +25,19 @@
     </div>
     <div class="form-group" ng-if="!(ora.id_sem || ora.id_lab)">
         <label>Curs:</label>
-        <select class="form-control" ng-model="ora.id_curs" ng-options="curs.id as curs.nume for curs in cursuri">
+        <select class="form-control" ng-model="ora.id_curs" ng-options="curs.id as curs.nume+ ' - ' +curs.sc_nume for curs in cursuri">
             <option value="">Curs...</option>
         </select>
     </div>
     <div class="form-group" ng-if="!(ora.id_curs || ora.id_lab)">
         <label>Seminar:</label>
-        <select class="form-control" ng-model="ora.id_sem" ng-options="sem.id as sem.nume for sem in seminarii">
+        <select class="form-control" ng-model="ora.id_sem" ng-options="sem.id as sem.nume +' - ' + sem.gr_nume for sem in seminarii">
             <option value="">Seminar...</option>
         </select>
     </div>
     <div class="form-group" ng-if="!(ora.id_sem || ora.id_curs)">
         <label>Laborator:</label>
-        <select class="form-control" ng-model="ora.id_lab" ng-options="lab.id as lab.nume for lab in laboratoare">
+        <select class="form-control" ng-model="ora.id_lab" ng-options="lab.id as lab.mat_abr + ' - ' + lab.sem_nume +' - ' + lab.gr_nume for lab in laboratoare">
             <option value="">Laborator...</option>
         </select>
     </div>

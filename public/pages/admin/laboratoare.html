@@ -14,11 +14,11 @@
             <option value="">Serie...</option>
         </select>
         <i class="fa fa-arrow-right"></i>
-        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nr_grupa for gr in grupe" ng-disabled="!filters.ser">
+        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nume for gr in grupe" ng-disabled="!filters.ser">
             <option value="">Grupa...</option>
         </select>
         <i class="fa fa-arrow-right"></i>
-        <select class="form-control" ng-model="filters.sgr" ng-options="sgr.id as sgr.nr_semigrupa for sgr in semigrupe" ng-disabled="!filters.gr">
+        <select class="form-control" ng-model="filters.sgr" ng-options="sgr.id as sgr.nume for sgr in semigrupe" ng-disabled="!filters.gr">
             <option value="">Semigrupe...</option>
         </select>
         <i class="fa fa-bars"></i>
@@ -46,8 +46,8 @@
             <td ng-if="!filters.f">{{laborator.fac_nume}}</td>
             <td ng-if="!filters.sc">{{laborator.sc_nume}}</td>
             <td ng-if="!filters.ser">{{laborator.ser_nume}}</td>
-            <td ng-if="!filters.gr">{{laborator.nr_gr}}</td>
-            <td ng-if="!filters.sgr">{{laborator.nr_sem}}</td>
+            <td ng-if="!filters.gr">{{laborator.gr_nume}}</td>
+            <td ng-if="!filters.sgr">{{laborator.sem_nume}}</td>
             <td ng-if="!filters.curs">{{laborator.curs_nume}} ({{laborator.mat_abr}})</td>
             <td>{{laborator.nume}} ({{laborator.mat_abr}})</td>
             <td ng-if="!filters.prof">{{laborator.prof_nume}}

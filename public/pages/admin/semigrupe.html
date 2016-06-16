@@ -14,7 +14,7 @@
             <option value="">Serie...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nr_grupa for gr in grupe" ng-disabled="!filters.ser">
+        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nume for gr in grupe" ng-disabled="!filters.ser">
             <option value="">Grupa...</option>
         </select>
         <i class="fa fa-bars"></i>
@@ -40,7 +40,7 @@
             <td ng-if="!filters.an">{{semigrupe.an_nume}}</td>
             <td ng-if="!filters.ser">{{semigrupe.ser_nume}}</td>
             <td ng-if="!filters.gr">{{semigrupe.gr_nr}}</td>
-            <td>{{semigrupe.nr_semigrupa}}</td>
+            <td>{{semigrupe.nume}}</td>
             <td><a ui-sref="^.studenti({sgr: semigrupe.id, gr: semigrupe.id_grupa, ser: semigrupe.id_serie,
              sc: semigrupe.id_sectie, f: semigrupe.fac_id})">Vezi studenti</a></td>
             <td class="act">

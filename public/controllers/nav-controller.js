@@ -1,5 +1,6 @@
 angular.module('app').controller('NavController', function($scope){
-    $scope.items = [{
+
+    var adminItems = [{
         label: 'Ani',
         state:'admin.ani'
     }, {
@@ -38,5 +39,36 @@ angular.module('app').controller('NavController', function($scope){
     }, {
         label: 'Orar',
         state: 'admin.orar'
+    }, {
+        label: 'Logout',
+        state: 'logout'
     }];
+
+    var studItems = [{
+        label: 'Orar',
+        state: 'student'
+    }, {
+        label: 'Logout',
+        state: 'logout'
+    }];
+
+    var profItems = [{
+        label: 'Orar',
+        state: 'profesor'
+    }, {
+        label: 'Logout',
+        state: 'logout'
+    }];
+
+    var guestItems = [{
+        label: 'Login',
+        state: 'login'
+    }];
+
+    $scope.menuItems = {
+        stud: studItems,
+        prof: profItems,
+        admin: adminItems,
+        '': guestItems
+    };
 });

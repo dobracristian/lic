@@ -14,11 +14,11 @@
             <option value="">Serie...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nr_grupa for gr in grupe" ng-disabled="!filters.ser">
+        <select class="form-control" ng-model="filters.gr" ng-options="gr.id as gr.nume for gr in grupe" ng-disabled="!filters.ser">
             <option value="">Grupa...</option>
         </select>
 
-        <select class="form-control" ng-model="filters.sgr" ng-options="sgr.id as sgr.nr_semigrupa for sgr in semigrupe" ng-disabled="!filters.gr">
+        <select class="form-control" ng-model="filters.sgr" ng-options="sgr.id as sgr.nume for sgr in semigrupe" ng-disabled="!filters.gr">
             <option value="">Semigrupe...</option>
         </select>
         <i class="fa fa-bars"></i>
@@ -38,6 +38,7 @@
             <th ng-if="!filters.sgr">Semigrupa</th>
             <th>Nume</th>
             <th>Prenume</th>
+            <th>Email</th>
             <th>Actiuni</th>
         </tr>
         <tr ng-repeat="student in studenti | filter:globalSearch">
@@ -49,12 +50,16 @@
             <td ng-if="!filters.sgr">{{student.sem_nr}}</td>
             <td>{{student.nume}}</td>
             <td>{{student.prenume}}</td>
+            <td>{{student.email}}</td>
             <td class="act">
                 <a href ng-click="delete(student.id)">
                     <i class="fa fa-times-circle"></i>
                 </a>
                 <a href ng-click="edit(student)">
                     <i class="fa fa-pencil-square"></i>
+                </a>
+                <a href ng-click="openChangePassword(student)">
+                    <i class="fa fa-key"></i>
                 </a>
             </td>
         </tr>

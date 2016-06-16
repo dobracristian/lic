@@ -96,7 +96,8 @@ angular.module('app').controller('StudentiController', function($scope, Restangu
             id_facultate: $scope.filters.f,
             id_serie:     $scope.filters.ser,
             id_grupa:     $scope.filters.gr,
-            id_semigrupa: $scope.filters.sgr
+            id_semigrupa: $scope.filters.sgr,
+            an:           $scope.filters.an
         };
 
         var modalInstance = $uibModal.open({
@@ -105,5 +106,27 @@ angular.module('app').controller('StudentiController', function($scope, Restangu
             controller: 'AdminStudentController',
             scope: modalScope
         }).result.then(loadStudenti);
+    };
+
+    $scope.openChangePassword = function(student) {
+
+        var modalScope = $scope.$new();
+        modalScope.info = {
+            email: student.email,
+            parola: ''
+        };
+
+        modalScope.changePassword = function() {
+            console.log('C', modalScope.info.parola, student.id);
+            Restangular.one('api/studenti', student.id).all('parola').post(modalScope.info).then(function(){
+                console.log('Salvare incheiata');
+                modalScope.$$childHead.$close();
+            });
+
+        };
+        $uibModal.open({
+            templateUrl: 'pages/admin/student-parola.html',
+            scope: modalScope
+        });
     };
 });

@@ -2,7 +2,7 @@ module.exports = function(server, getConnection){
 
     function getGrupe(body) {
         return  {
-            nr_grupa: body.nr_grupa,
+            nume: body.nume,
             id_serie: body.id_serie
         };
     }
@@ -42,7 +42,7 @@ module.exports = function(server, getConnection){
         if(conditions.length) {
             query += ' where '+ conditions.join(' and ');
         }
-        query+= ' order by grupe.nr_grupa';
+        query+= ' order by grupe.nume';
 
         conn.query(query, params, function(err, rows){
 

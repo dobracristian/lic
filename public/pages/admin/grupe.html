@@ -34,7 +34,7 @@
             <td ng-if="!filters.sc">{{grupe.sc_nume}}</td>
             <td ng-if="!filters.an">{{grupe.an_nume}}</td>
             <td ng-if="!filters.ser">{{grupe.ser_nume}}</td>
-            <td>{{grupe.nr_grupa}}</td>
+            <td>{{grupe.nume}}</td>
             <td><a ui-sref="^.semigrupe({gr: grupe.id, ser: grupe.id_serie, sc: grupe.id_sectie, f: grupe.fac_id})">Vezi semigrupe</a></td>
             <td class="act">
                 <a href ng-click="delete(grupe.id)">

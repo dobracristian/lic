@@ -13,8 +13,12 @@ module.exports = function(server, getConnection){
             ' Inner join materii mat on c.id_materie=mat.id' +
             ' left outer join laboratoare lab on lab.id_curs=c.id and lab.id_semigrupa=std.id_semigrupa' +
             ' left outer join seminarii sem on sem.id_curs=c.id and sem.id_grupa=gr.id' +
-            ' Where std.id=18';
-        conn.query(query, function(err, rows){
+            ' Where std.id=?';
+
+        var auth = require('../../auth.js');
+        var user = auth.getUser(req);
+
+        conn.query(query, [user.id_stud], function(err, rows){
 
             conn.end();
             if (err) throw err;

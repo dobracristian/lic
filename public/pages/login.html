@@ -8,35 +8,18 @@
                 <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane active" id="login">
                         <form class="form-signin" action="" method="">
-                            <input type="text" class="form-control" placeholder="Username" required autofocus>
-                            <input type="password" class="form-control" placeholder="Password" required>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"/>
-                                    Remember me
-                                </label>
-                            </div>
-                            <a href ng-click="login('admin')">Admin</a>
-                            <a href ng-click="login('student')">Student</a>
-                            <a href ng-click="login('profesor')">Profesor</a>
-                            <input type="button" class="btn btn-lg btn-default btn-block" value="Sign In" />
+                            <input type="text" class="form-control" placeholder="Username" ng-model="username" required autofocus>
+                            <input type="password" class="form-control" placeholder="Password" ng-model="parola" required>
+                            <div ng-show="badLogin">Parola sau username gresit</div>
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox"/>-->
+                                    <!--Remember me-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <input type="button" class="btn btn-lg btn-default btn-block" value="Sign In" ng-click="login()" />
                         </form>
-                        <div id="tabs" data-tabs="tabs" class="panel-footer">
-                            <p class="text-center"><span class="glyphicon glyphicon-user"></span><a href="#register" data-toggle="tab">Need an Account?</a></p>
-                        </div>
                     </div>
-                    <div class="tab-pane" id="register">
-                        <form class="form-signin" action="" method="">
-                            <input type="text" class="form-control" placeholder="User Name ..." required autofocus>
-                            <input type="email" class="form-control" placeholder="Emaill Address ..." required>
-                            <input type="password" class="form-control" placeholder="Password ..." required>
-                            <input type="submit" class="btn btn-lg btn-default btn-block" value="Sign Up" />
-                        </form>
-                        <div id="tabs" data-tabs="tabs" class="panel-footer">
-                            <p class="text-center"><a href="#login" data-toggle="tab">Back to Login</a></p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

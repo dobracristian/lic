@@ -10,6 +10,7 @@
             <th>Cursuri</th>
             <th>Laboratoare</th>
             <th>Seminarii</th>
+            <th>Email</th>
             <th>Actiuni</th>
         </tr>
         <tr ng-repeat="profesor in profesori | filter:globalSearch">
@@ -18,9 +19,11 @@
             <td><a ui-sref="^.cursuri({prof: profesor.id})">Vezi cursuri</a></td>
             <td><a ui-sref="^.laboratoare({prof: profesor.id})">Vezi laboratoare</a></td>
             <td><a ui-sref="^.seminarii({prof: profesor.id})">Vezi seminarii</a></td>
+            <td>{{profesor.email}}</td>
             <td class="act">
                 <a href ng-click="delete(profesor.id)" title="Sterge"><i class="fa fa-times-circle"></i></a>
                 <a href ng-click="edit(profesor)" title="Editare"><i class="fa fa-pencil-square"></i></a>
+                <a href ng-click="openChangePassword(profesor)"><i class="fa fa-key"></i></a>
             </td>
         </tr>
     </table>

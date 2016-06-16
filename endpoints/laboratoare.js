@@ -14,8 +14,8 @@ module.exports = function(server, getConnection){
 
         var conn = getConnection();
         var query = 'SELECT laboratoare.*, cursuri.nume as curs_nume, profesori.nume as prof_nume,' +
-            ' profesori.prenume as prof_pren, grupe.nr_grupa as nr_gr, serii.nume as ser_nume, materii.abreviere as mat_abr, ' +
-            ' sectii.nume as sc_nume, semigrupe.nr_semigrupa as nr_sem, facultati.nume as fac_nume' +
+            ' profesori.prenume as prof_pren, grupe.nume as gr_nume, serii.nume as ser_nume, materii.abreviere as mat_abr, ' +
+            ' sectii.nume as sc_nume, semigrupe.nume as sem_nume, facultati.nume as fac_nume' +
             ' from laboratoare' +
             ' Inner join cursuri on laboratoare.id_curs=cursuri.id' +
             ' Inner join materii on cursuri.id_materie=materii.id' +

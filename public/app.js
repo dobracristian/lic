@@ -107,6 +107,13 @@ angular.module('app', ['ui.router', 'restangular', 'ui.bootstrap']).config(funct
     });
 
     $stateProvider.state({
+        name: 'logout',
+        url: '/login',
+        //templateUrl: 'pages/login.html',
+        controller: 'LogoutController'
+    });
+
+    $stateProvider.state({
         name: 'student',
         url: '/student',
         templateUrl: 'pages/student.html',
@@ -141,4 +148,15 @@ angular.module('app', ['ui.router', 'restangular', 'ui.bootstrap']).config(funct
         controller: 'ProfesorController'
     });
 
+});
+angular.module('app').run(function($rootScope, $http) {
+    $rootScope.USER = {
+        tip: ''
+    };
+
+    $http.get('/api/whoami').then(function(response) {
+        if(response.data) {
+            $rootScope.USER = response.data;
+        }
+    });
 });

@@ -16,6 +16,14 @@ module.exports = function(server, getConnection) {
     //Orar
     server.get('api/orar', function(req, res) {
 
+        var auth = require('../auth.js');
+        var user = auth.getUser(req);
+
+        if(!user.tip) {
+            res.send(403, []);
+            return;
+        }
+
         var conn = getConnection();
         var query = 'Select orar.*, coalesce(cursuri.nume, laboratoare.nume, seminarii.nume) as nume,' +
             ' cursuri.nume as curs_nume, laboratoare.nume as lab_nume, seminarii.nume as sem_nume,' +
@@ -27,20 +35,31 @@ module.exports = function(server, getConnection) {
             ' left outer join cursuri curs_ls on laboratoare.id_curs=curs_ls.id or seminarii.id_curs=curs_ls.id'+
             ' left outer join materii m on cursuri.id_materie=m.id or curs_ls.id_materie=m.id' +
             ' left outer join profesori p on p.id=cursuri.id_prof or p.id=laboratoare.id_prof or p.id=seminarii.id_prof';
+        var conditions = [];
+        var params = [];
         if(req.params.sapt){
-            query += ' where orar.saptamana = ?';
+            conditions.push('orar.saptamana=?');
+            params.push(req.params.sapt);
+        }
+        if(user.tip === 'stud'){
+            conditions.push('(laboratoare.id_semigrupa=? or seminarii.id_grupa=? or cursuri.id_serie=?)');
+            params.push(user.id_semigrupa, user.id_grupa, user.id_serie);
+        }
+        else if(user.tip === 'prof'){
+            conditions.push('(laboratoare.id_prof=? or seminarii.id_prof=? or cursuri.id_prof=?)');
+            params.push(user.id_prof, user.id_prof, user.id_prof);
+        }
+        if(conditions.length) {
+            query +=' where '+ conditions.join(' and ');
         }
         query += ' order by zi, ora_start, ora_sf desc, id';
-
-        console.log('Q', query);
-
-        conn.query(query, [req.params.sapt], function(err, rows) {
+        conn.query(query, params, function(err, rows) {
 
             conn.end();
             if(err) throw err;
             res.send(rows);
         })
-    })
+    });
 
     // Adaugare in orar
     server.post('/api/orar', function (req, res){

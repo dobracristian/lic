@@ -4,7 +4,8 @@ module.exports = function(server, getConnection) {
         return  {
             nume:         body.nume,
             prenume:      body.prenume,
-            id_semigrupa: body.id_semigrupa
+            id_semigrupa: body.id_semigrupa,
+            email:        body.email
         };
     }
 
@@ -13,17 +14,18 @@ module.exports = function(server, getConnection) {
 
         var conn = getConnection();
 
-        var query = 'SELECT studenti.*, semigrupe.nr_semigrupa as sem_nr, grupe.nr_grupa as gr_nr,' +
+        var query = 'SELECT studenti.*, semigrupe.nume as sem_nr, grupe.nume as gr_nr,' +
             ' grupe.id as gr_id, serii.id as ser_id, serii.an as ser_an, ' +
             ' serii.nume as ser_nume, sectii.nume as sc_nume, sectii.id as sc_id,' +
-            ' facultati.nume as fac_nume, facultati.id as fac_id, ani.nume as an_nume ' +
+            ' facultati.nume as fac_nume, facultati.id as fac_id, ani.nume as an_nume, useri.email as email ' +
             ' from studenti' +
             ' Inner join semigrupe on studenti.id_semigrupa=semigrupe.id' +
             ' Inner join grupe on semigrupe.id_grupa=grupe.id' +
             ' Inner join serii on grupe.id_serie=serii.id' +
             ' Inner join sectii on serii.id_sectie=sectii.id' +
             ' Inner join ani on serii.an=ani.nr' +
-            ' Inner join facultati on sectii.id_facultate=facultati.id';
+            ' Inner join facultati on sectii.id_facultate=facultati.id' +
+            ' left outer join useri on studenti.id=useri.id_stud';
         var conditions = [];
         var params = [];
         if(req.params.sgr){
@@ -106,4 +108,26 @@ module.exports = function(server, getConnection) {
         });
     });
 
+    //Modificare parola
+    server.post('/api/studenti/:id/parola', function (req, res){
+
+        var conn = getConnection();
+        var bcrypt = require('bcrypt-nodejs');
+
+        var parola = req.body.parola;
+        var salt = bcrypt.genSaltSync(6);
+        parola = bcrypt.hashSync(parola, salt);
+
+        conn.query('replace useri set ?', {
+            email: req.body.email,
+            parola: parola,
+            tip: 'stud',
+            id_stud: req.params.id
+        }, function(err) {
+
+            conn.end();
+            if (err) throw err;
+            res.send(200, 'Parola schimbata');
+        });
+    });
 };

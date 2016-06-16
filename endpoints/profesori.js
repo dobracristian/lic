@@ -3,7 +3,8 @@ module.exports = function(server, getConnection){
     function getProf(body) {
         return  {
             nume:    body.nume,
-            prenume: body.prenume
+            prenume: body.prenume,
+            email:   body.email
         };
     }
 
@@ -11,7 +12,10 @@ module.exports = function(server, getConnection){
     server.get('/api/profesori', function(req, res) {
 
         var conn = getConnection();
-        conn.query('SELECT * from profesori order by nume, prenume', function(err, rows){
+        conn.query('SELECT profesori.*, useri.email as email ' +
+            ' from profesori ' +
+            ' left outer join useri on profesori.id=useri.id_prof ' +
+            ' order by nume, prenume', function(err, rows){
 
             conn.end();
             if (err) throw err;
@@ -58,6 +62,29 @@ module.exports = function(server, getConnection){
             conn.end();
             if (err) throw err;
             res.send(200, 'Updated');
+        });
+    });
+
+    //Modificare parola
+    server.post('/api/profesori/:id/parola', function (req, res){
+
+        var conn = getConnection();
+        var bcrypt = require('bcrypt-nodejs');
+
+        var parola = req.body.parola;
+        var salt = bcrypt.genSaltSync(6);
+        parola = bcrypt.hashSync(parola, salt);
+
+        conn.query('replace useri set ?', {
+            email: req.body.email,
+            parola: parola,
+            tip: 'prof',
+            id_prof: req.params.id
+        }, function(err) {
+
+            conn.end();
+            if (err) throw err;
+            res.send(200, 'Parola schimbata');
         });
     });
 };
